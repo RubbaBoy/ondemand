@@ -3,13 +3,14 @@ import 'package:ondemand/get_item.dart' as _get_item;
 import 'package:ondemand/get_items.dart' as _get_items;
 import 'package:ondemand/get_kitchens.dart' as _get_kitchens;
 import 'package:ondemand/get_menus.dart' as _get_menus;
+import 'package:ondemand/helper/kitchen_helper.dart';
 import 'package:ondemand/list_places.dart' as _list_places;
 import 'package:ondemand/ondemand.dart';
 
 Future<void> main() async {
   var initialization = await Initialization.create();
   var contextId = initialization.config.contextID;
-  var onDemand = initialization.onDemand;
+  var onDemand = initialization;
 
   configPrint(initialization.config);
 
@@ -21,53 +22,10 @@ Future<void> main() async {
   var commons =
       kitchens.kitchens.firstWhere((kitchen) => kitchen.name == 'The Commons');
 
-  // Lists the places available in the kitchen (There should always be 1)
-  var places = await onDemand.listPlaces(
-      _list_places.Request(
-          scheduleTime: _list_places.ScheduleTime(
-              startTime: '7:00 PM', endTime: '7:15 PM')),
-      contextId: contextId,
-      displayId: commons.displayProfileId);
-
-  // Get the first (and most likely only) place, where more data is available
-  // about the kitchen compared to the `commons` object
-  var place = places.places.first;
-
-  // Prints some basic data about The Commons
-  print('Place "${place.name}"');
-  print(
-      'Available from ${place.availableAt.open} - ${place.availableAt.close} (Currently ${place.availableNow ? 'available' : 'unavailable'})');
-  print('Menus:');
-  // Menus for ??? usually only one used I think, a lot are tests
-  for (var menu in place.menus) {
-    print('Menu ${menu.name} (${menu.id})');
-    // Categories such as grill, sub, pizza, etc.
-    for (var category in menu.categories) {
-      print('\tCategory ${category.name} - ${category.items.length} items');
-    }
-  }
-
-  // Gets the available menus for The Commons
-  // There are usually testing menus, and often a different menu for each day
-  var menus = await onDemand.getMenus(
-      _get_menus.Request(
-          menus: place.menus
-              .map((e) => _get_menus.Menus.fromJson(e.toJson()))
-              .toList(),
-          scheduleTime:
-              _get_menus.ScheduleTime(startTime: '7:00 PM', endTime: '7:15 PM'),
-          schedule: place.schedule
-              .map((e) => _get_menus.Schedule.fromJson(e.toJson()))
-              .toList(),
-          scheduledDay: 0,
-          storePriceLevel: PRICE_LEVEL,
-          currencyUnit: CURRENCY),
-      contextId: contextId,
-      displayId: commons.displayProfileId,
-      placeId: place.id);
-
   // The menu being used today
-  var mainMenu = menus.places.first;
+  var menuResponse = await getMenu(onDemand, commons, '7:00 pm', '7:15 pm');
+  var mainMenu = menuResponse.menu;
+
   print('\nThe menu being used today is "${mainMenu.name}" (${mainMenu.id})');
   print(
       'Categories: ${mainMenu.categories.map((category) => category.name).join(', ')}\n');
@@ -80,7 +38,7 @@ Future<void> main() async {
   var items = await onDemand.getItems(
       _get_items.Request(
         // The place ID
-        conceptId: place.id,
+        conceptId: menuResponse.place.id,
         // The items IDs to get (this shouldn't be restricted to one category)
         itemIds: grillCategory.items,
         currencyUnit: CURRENCY,

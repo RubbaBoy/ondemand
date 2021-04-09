@@ -4,15 +4,18 @@ const CURRENCY = 'USD';
 
 const CUSTOMER_TYPE_UID = 'campusid';
 
-class TenderIds {
-  static const TIGER_BUCKS = '9';
-  static const DINING_DOLLARS = '16';
+class TenderId {
+  static const TIGER_BUCKS = TenderId('Tiger Bucks', '9', '1');
+  static const DINING_DOLLARS = TenderId('Dining Dollars', '16', '4');
 
-  static const TIGER_BUCKS_DATA = '1';
-  static const DINING_DOLLARS_DATA = '4';
+  static const values = [TIGER_BUCKS, DINING_DOLLARS];
 
-  static const TENDERS = <String, String>{
-    TIGER_BUCKS: 'Tiger Bucks',
-    DINING_DOLLARS: 'Dining Dollars'
-  };
+  final String name;
+  final String tenderId;
+  final String dataId;
+
+  const TenderId(this.name, this.tenderId, this.dataId);
+
+  static TenderId getTender(String id) =>
+      values.firstWhere((element) => element.tenderId == id, orElse: () => null);
 }

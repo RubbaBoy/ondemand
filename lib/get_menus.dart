@@ -63,42 +63,47 @@ class Categories {
 
 /// Json path:
 /// ```
-/// request.menus
+/// response.response
 /// ```
-class Menus {
-  // request.menus#name
+class Menu {
+  // response.response#name
   final String name;
-  // request.menus#description
+  // response.response#description
   final String description;
-  // request.menus#id
+  // response.response#id
   final String id;
-  // request.menus#categories
+  // response.response#categories
   final List<Categories> categories;
-  // request.menus#lastUpdateTime
+  // response.response#lastUpdateTime
   final String lastUpdateTime;
+  // response.response#customLabels
+  final CustomLabels customLabels;
 
-  Menus(
+  Menu(
       {this.name,
       this.description,
       this.id,
       this.categories,
-      this.lastUpdateTime});
+      this.lastUpdateTime,
+      this.customLabels});
 
-  Menus.fromJson(Map<String, dynamic> json)
+  Menu.fromJson(Map<String, dynamic> json)
       : name = json['name'],
         description = json['description'],
         id = json['id'],
         categories = (json['categories'] as List)
             ?.map((e) => Categories.fromJson(e ?? {}))
             ?.toList(),
-        lastUpdateTime = json['lastUpdateTime'];
+        lastUpdateTime = json['lastUpdateTime'],
+        customLabels = CustomLabels.fromJson(json['customLabels'] ?? {});
 
   Map<String, dynamic> toJson() => {
         'name': name,
         'description': description,
         'id': id,
         'categories': categories?.map((e) => e?.toJson())?.toList(),
-        'lastUpdateTime': lastUpdateTime
+        'lastUpdateTime': lastUpdateTime,
+        'customLabels': customLabels?.toJson()
       };
 }
 
@@ -223,7 +228,7 @@ class ScheduleTime {
 /// ```
 class Request extends BaseRequest {
   // request#menus
-  final List<Menus> menus;
+  final List<Menu> menus;
   // request#schedule
   final List<Schedule> schedule;
   // request#scheduleTime
@@ -247,7 +252,7 @@ class Request extends BaseRequest {
 
   Request.fromJson(Map<String, dynamic> json, Map<String, String> headers)
       : menus = (json['menus'] as List)
-            ?.map((e) => Menus.fromJson(e ?? {}))
+            ?.map((e) => Menu.fromJson(e ?? {}))
             ?.toList(),
         schedule = (json['schedule'] as List)
             ?.map((e) => Schedule.fromJson(e ?? {}))
@@ -426,52 +431,6 @@ class CustomLabels {
       };
 }
 
-/// Json path:
-/// ```
-/// response.response
-/// ```
-class Place {
-  // response.response#name
-  final String name;
-  // response.response#description
-  final String description;
-  // response.response#id
-  final String id;
-  // response.response#categories
-  final List<Categories> categories;
-  // response.response#lastUpdateTime
-  final String lastUpdateTime;
-  // response.response#customLabels
-  final CustomLabels customLabels;
-
-  Place(
-      {this.name,
-      this.description,
-      this.id,
-      this.categories,
-      this.lastUpdateTime,
-      this.customLabels});
-
-  Place.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
-        description = json['description'],
-        id = json['id'],
-        categories = (json['categories'] as List)
-            ?.map((e) => Categories.fromJson(e ?? {}))
-            ?.toList(),
-        lastUpdateTime = json['lastUpdateTime'],
-        customLabels = CustomLabels.fromJson(json['customLabels'] ?? {});
-
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'description': description,
-        'id': id,
-        'categories': categories?.map((e) => e?.toJson())?.toList(),
-        'lastUpdateTime': lastUpdateTime,
-        'customLabels': customLabels?.toJson()
-      };
-}
-
 /// Url: https://ondemand.rit.edu/api/sites/1312/dc9df36d-8a64-42cf-b7c1-fa041f5f3cfd/concepts/2162/menus/3403
 /// Method: POST
 /// Json path:
@@ -480,14 +439,14 @@ class Place {
 /// ```
 class Response extends BaseResponse {
   // response#response
-  final List<Place> places;
+  final List<Menu> menus;
 
-  Response({this.places, Map<String, String> headers = const {}})
+  Response({this.menus, Map<String, String> headers = const {}})
       : super(headers);
 
   Response.fromJson(dynamic json, Map<String, String> headers)
-      : places = (json as List)?.map((e) => Place.fromJson(e ?? {}))?.toList(),
+      : menus = (json as List)?.map((e) => Menu.fromJson(e ?? {}))?.toList(),
         super(headers);
 
-  List<dynamic> toJson() => places?.map((e) => e?.toJson())?.toList();
+  List<dynamic> toJson() => menus?.map((e) => e?.toJson())?.toList();
 }

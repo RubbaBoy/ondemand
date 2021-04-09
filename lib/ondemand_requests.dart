@@ -24,6 +24,7 @@ import 'get_wait_time.dart' as _get_wait_time;
 
 class OnDemand {
   Map<String, String> baseHeaders = {};
+  _get_config.Response config;
   final String siteNumber;
 
   OnDemand({this.siteNumber});
