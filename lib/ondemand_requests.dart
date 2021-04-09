@@ -32,10 +32,10 @@ class OnDemand {
     var res = await get('https://ondemand.rit.edu/api/config', request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _get_config.Response.fromJson(await res.json(), res.headers.toMap());
+    return _get_config.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_get_items.Response> getItems(_get_items.Request request,
@@ -45,10 +45,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _get_items.Response.fromJson(await res.json(), res.headers.toMap());
+    return _get_items.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_login.Response> login(_login.Request request) async {
@@ -57,10 +57,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _login.Response.fromJson(res.headers.toMap());
+    return _login.Response.fromJson(res.headers);
   }
 
   Future<_get_kitchens.Response> getKitchens(
@@ -68,11 +68,10 @@ class OnDemand {
     var res = await get('https://ondemand.rit.edu/api/sites/$siteNumber',
         request, {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _get_kitchens.Response.fromJson(
-        await res.json(), res.headers.toMap());
+    return _get_kitchens.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_get_manifest.Response> getManifest(
@@ -80,11 +79,10 @@ class OnDemand {
     var res = await get('https://ondemand.rit.edu/static/assets/manifest.json',
         request, {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _get_manifest.Response.fromJson(
-        await res.json(), res.headers.toMap());
+    return _get_manifest.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_decrypt_cookie.Response> decryptCookie(
@@ -94,11 +92,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _decrypt_cookie.Response.fromJson(
-        await res.json(), res.headers.toMap());
+    return _decrypt_cookie.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_get_leads.Response> getLeads(_get_leads.Request request,
@@ -108,10 +105,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _get_leads.Response.fromJson(await res.json(), res.headers.toMap());
+    return _get_leads.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_list_places.Response> listPlaces(_list_places.Request request,
@@ -121,11 +118,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _list_places.Response.fromJson(
-        await res.json(), res.headers.toMap());
+    return _list_places.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_get_menus.Response> getMenus(_get_menus.Request request,
@@ -135,10 +131,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _get_menus.Response.fromJson(await res.json(), res.headers.toMap());
+    return _get_menus.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_get_item.Response> getItem(_get_item.Request request,
@@ -148,10 +144,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _get_item.Response.fromJson(await res.json(), res.headers.toMap());
+    return _get_item.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_add_cart_adv.Response> addCartAdv(_add_cart_adv.Request request,
@@ -161,11 +157,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _add_cart_adv.Response.fromJson(
-        await res.json(), res.headers.toMap());
+    return _add_cart_adv.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_add_cart.Response> addCart(_add_cart.Request request,
@@ -175,10 +170,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _add_cart.Response.fromJson(await res.json(), res.headers.toMap());
+    return _add_cart.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_account_inquiry.Response> accountInquiry(
@@ -186,11 +181,10 @@ class OnDemand {
     var res = await post('https://ondemand.rit.edu/api/atrium/accountInquiry',
         request, {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _account_inquiry.Response.fromJson(
-        await res.json(), res.headers.toMap());
+    return _account_inquiry.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_get_revenue_category.Response> getRevenueCategory(
@@ -201,11 +195,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _get_revenue_category.Response.fromJson(
-        await res.json(), res.headers.toMap());
+    return _get_revenue_category.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_get_tenders.Response> getTenders(_get_tenders.Request request) async {
@@ -214,11 +207,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _get_tenders.Response.fromJson(
-        await res.json(), res.headers.toMap());
+    return _get_tenders.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_get_tender_info.Response> getTenderInfo(
@@ -228,11 +220,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _get_tender_info.Response.fromJson(
-        await res.json(), res.headers.toMap());
+    return _get_tender_info.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_auth_payment.Response> authPayment(
@@ -242,11 +233,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _auth_payment.Response.fromJson(
-        await res.json(), res.headers.toMap());
+    return _auth_payment.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_check_capacity.Response> checkCapacity(
@@ -254,11 +244,10 @@ class OnDemand {
     var res = await put('https://ondemand.rit.edu/api/order/capacityCheck',
         request, {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _check_capacity.Response.fromJson(
-        await res.json(), res.headers.toMap());
+    return _check_capacity.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_create_closed_order.Response> createClosedOrder(
@@ -268,11 +257,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _create_closed_order.Response.fromJson(
-        await res.json(), res.headers.toMap());
+    return _create_closed_order.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_get_sms.Response> getSms(_get_sms.Request request) async {
@@ -281,10 +269,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _get_sms.Response.fromJson(await res.json(), res.headers.toMap());
+    return _get_sms.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_send_sms.Response> sendSms(_send_sms.Request request) async {
@@ -293,10 +281,10 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _send_sms.Response.fromJson(await res.json(), res.headers.toMap());
+    return _send_sms.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_get_wait_time.Response> getWaitTime(_get_wait_time.Request request,
@@ -306,10 +294,9 @@ class OnDemand {
         request,
         {...request.headers, ...baseHeaders});
     if (res.statusCode != 200) {
-      return Future.error('Status ${res.statusCode}: ${await res.text()}');
+      return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _get_wait_time.Response.fromJson(
-        await res.json(), res.headers.toMap());
+    return _get_wait_time.Response.fromJson(res.json(), res.headers);
   }
 }
