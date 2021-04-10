@@ -236,3 +236,4 @@ class Response extends BaseResponse {
   Map<String, dynamic> toJson() =>
       {'isToSuggest': isToSuggest, 'strategy': strategy};
 }
+

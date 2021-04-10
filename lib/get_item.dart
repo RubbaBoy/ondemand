@@ -29,26 +29,6 @@ class Request extends BaseRequest {
 
 /// Json path:
 /// ```
-/// response.price
-/// ```
-class Price {
-  // response.price#currencyUnit
-  final String currencyUnit;
-  // response.price#amount
-  final String amount;
-
-  Price({this.currencyUnit, this.amount});
-
-  Price.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
 /// response.priceLevels[]
 /// ```
 class PriceLevel {
@@ -446,60 +426,6 @@ class ItemImage {
 
 /// Json path:
 /// ```
-/// response.modifiers.modifiers.options
-/// ```
-class Options {
-  // response.modifiers.modifiers.options#id
-  final String id;
-  // response.modifiers.modifiers.options#description
-  final String description;
-  // response.modifiers.modifiers.options#selected
-  final bool selected;
-  // response.modifiers.modifiers.options#baseAmount
-  final String baseAmount;
-  // response.modifiers.modifiers.options#amount
-  final String amount;
-  // response.modifiers.modifiers.options#childPriceLevelId
-  final String childPriceLevelId;
-  // response.modifiers.modifiers.options#parentGroupId
-  final String parentGroupId;
-  // response.modifiers.modifiers.options#currencyUnit
-  final String currencyUnit;
-
-  Options(
-      {this.id,
-      this.description,
-      this.selected,
-      this.baseAmount,
-      this.amount,
-      this.childPriceLevelId,
-      this.parentGroupId,
-      this.currencyUnit});
-
-  Options.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        description = json['description'],
-        selected = json['selected'],
-        baseAmount = json['baseAmount'],
-        amount = json['amount'],
-        childPriceLevelId = json['childPriceLevelId'],
-        parentGroupId = json['parentGroupId'],
-        currencyUnit = json['currencyUnit'];
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'description': description,
-        'selected': selected,
-        'baseAmount': baseAmount,
-        'amount': amount,
-        'childPriceLevelId': childPriceLevelId,
-        'parentGroupId': parentGroupId,
-        'currencyUnit': currencyUnit
-      };
-}
-
-/// Json path:
-/// ```
 /// response.modifiers.modifiers
 /// ```
 class Modifier {
@@ -810,3 +736,4 @@ class Response extends BaseResponse {
         'modifiers': modifiers?.toJson()
       };
 }
+

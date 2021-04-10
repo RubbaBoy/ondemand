@@ -2,26 +2,6 @@ import 'base.dart';
 
 /// Json path:
 /// ```
-/// request.item.price
-/// ```
-class Price {
-  // request.item.price#currencyUnit
-  final String currencyUnit;
-  // request.item.price#amount
-  final String amount;
-
-  Price({this.currencyUnit, this.amount});
-
-  Price.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
 /// response.addedItem.priceLevels.1
 /// ```
 class Num1 {
@@ -111,65 +91,6 @@ class Properties {
   Properties.fromJson(Map<String, dynamic> json) : cartGuid = json['cartGuid'];
 
   Map<String, dynamic> toJson() => {'cartGuid': cartGuid};
-}
-
-/// Json path:
-/// ```
-/// response.addedItem.selectedModifiers
-/// ```
-class SelectedModifiers {
-  // response.addedItem.selectedModifiers#id
-  final String id;
-  // response.addedItem.selectedModifiers#description
-  final String description;
-  // response.addedItem.selectedModifiers#selected
-  final bool selected;
-  // response.addedItem.selectedModifiers#baseAmount
-  final String baseAmount;
-  // response.addedItem.selectedModifiers#amount
-  final String amount;
-  // response.addedItem.selectedModifiers#childPriceLevelId
-  final String childPriceLevelId;
-  // response.addedItem.selectedModifiers#parentGroupId
-  final String parentGroupId;
-  // response.addedItem.selectedModifiers#currencyUnit
-  final String currencyUnit;
-  // response.addedItem.selectedModifiers#lineItemId
-  final String lineItemId;
-
-  SelectedModifiers(
-      {this.id,
-      this.description,
-      this.selected,
-      this.baseAmount,
-      this.amount,
-      this.childPriceLevelId,
-      this.parentGroupId,
-      this.currencyUnit,
-      this.lineItemId});
-
-  SelectedModifiers.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        description = json['description'],
-        selected = json['selected'],
-        baseAmount = json['baseAmount'],
-        amount = json['amount'],
-        childPriceLevelId = json['childPriceLevelId'],
-        parentGroupId = json['parentGroupId'],
-        currencyUnit = json['currencyUnit'],
-        lineItemId = json['lineItemId'];
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'description': description,
-        'selected': selected,
-        'baseAmount': baseAmount,
-        'amount': amount,
-        'childPriceLevelId': childPriceLevelId,
-        'parentGroupId': parentGroupId,
-        'currencyUnit': currencyUnit,
-        'lineItemId': lineItemId
-      };
 }
 
 /// Json path:
@@ -448,59 +369,6 @@ class Item {
 
 /// Json path:
 /// ```
-/// request.currencyDetails
-/// ```
-class CurrencyDetails {
-  // request.currencyDetails#currencyDecimalDigits
-  final String currencyDecimalDigits;
-  // request.currencyDetails#currencyCultureName
-  final String currencyCultureName;
-  // request.currencyDetails#currencyCode
-  final String currencyCode;
-  // request.currencyDetails#currencySymbol
-  final String currencySymbol;
-
-  CurrencyDetails(
-      {this.currencyDecimalDigits,
-      this.currencyCultureName,
-      this.currencyCode,
-      this.currencySymbol});
-
-  CurrencyDetails.fromJson(Map<String, dynamic> json)
-      : currencyDecimalDigits = json['currencyDecimalDigits'],
-        currencyCultureName = json['currencyCultureName'],
-        currencyCode = json['currencyCode'],
-        currencySymbol = json['currencySymbol'];
-
-  Map<String, dynamic> toJson() => {
-        'currencyDecimalDigits': currencyDecimalDigits,
-        'currencyCultureName': currencyCultureName,
-        'currencyCode': currencyCode,
-        'currencySymbol': currencySymbol
-      };
-}
-
-/// Json path:
-/// ```
-/// request.schedule.displayProfileState.conceptStates
-/// ```
-class ConceptStates {
-  // request.schedule.displayProfileState.conceptStates#conceptId
-  final String conceptId;
-  // request.schedule.displayProfileState.conceptStates#menuId
-  final String menuId;
-
-  ConceptStates({this.conceptId, this.menuId});
-
-  ConceptStates.fromJson(Map<String, dynamic> json)
-      : conceptId = json['conceptId'],
-        menuId = json['menuId'];
-
-  Map<String, dynamic> toJson() => {'conceptId': conceptId, 'menuId': menuId};
-}
-
-/// Json path:
-/// ```
 /// request.schedule.displayProfileState
 /// ```
 class DisplayProfileState {
@@ -556,25 +424,6 @@ class Schedule {
         'properties': properties?.toJson(),
         'displayProfileState': displayProfileState?.toJson()
       };
-}
-
-/// Json path:
-/// ```
-/// request.scheduleTime
-/// ```
-class ScheduleTime {
-  // request.scheduleTime#startTime
-  final String startTime;
-  // request.scheduleTime#endTime
-  final String endTime;
-
-  ScheduleTime({this.startTime, this.endTime});
-
-  ScheduleTime.fromJson(Map<String, dynamic> json)
-      : startTime = json['startTime'],
-        endTime = json['endTime'];
-
-  Map<String, dynamic> toJson() => {'startTime': startTime, 'endTime': endTime};
 }
 
 /// Url: https://ondemand.rit.edu/api/order/1312/dc9df36d-8a64-42cf-b7c1-fa041f5f3cfd/orders
@@ -1053,26 +902,6 @@ class TotalRoundAmount {
   TotalRoundAmount({this.currencyUnit, this.amount});
 
   TotalRoundAmount.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
-/// response.orderDetails.taxBreakdown.salesTaxes.amount
-/// ```
-class Amount {
-  // response.orderDetails.taxBreakdown.salesTaxes.amount#currencyUnit
-  final String currencyUnit;
-  // response.orderDetails.taxBreakdown.salesTaxes.amount#amount
-  final String amount;
-
-  Amount({this.currencyUnit, this.amount});
-
-  Amount.fromJson(Map<String, dynamic> json)
       : currencyUnit = json['currencyUnit'],
         amount = json['amount'];
 
@@ -1651,3 +1480,4 @@ class Response extends BaseResponse {
         'mealPeriodId': mealPeriodId
       };
 }
+

@@ -1,24 +1,5 @@
 import 'base.dart';
 
-/// Json path:
-/// ```
-/// request.scheduleTime
-/// ```
-class ScheduleTime {
-  // request.scheduleTime#startTime
-  final String startTime;
-  // request.scheduleTime#endTime
-  final String endTime;
-
-  ScheduleTime({this.startTime, this.endTime});
-
-  ScheduleTime.fromJson(Map<String, dynamic> json)
-      : startTime = json['startTime'],
-        endTime = json['endTime'];
-
-  Map<String, dynamic> toJson() => {'startTime': startTime, 'endTime': endTime};
-}
-
 /// Url: https://ondemand.rit.edu/api/sites/1312/dc9df36d-8a64-42cf-b7c1-fa041f5f3cfd/concepts/2162
 /// Method: POST
 /// Json path:
@@ -270,25 +251,6 @@ class Properties {
 
 /// Json path:
 /// ```
-/// response.response.schedule.displayProfileState.conceptStates
-/// ```
-class ConceptStates {
-  // response.response.schedule.displayProfileState.conceptStates#conceptId
-  final String conceptId;
-  // response.response.schedule.displayProfileState.conceptStates#menuId
-  final String menuId;
-
-  ConceptStates({this.conceptId, this.menuId});
-
-  ConceptStates.fromJson(Map<String, dynamic> json)
-      : conceptId = json['conceptId'],
-        menuId = json['menuId'];
-
-  Map<String, dynamic> toJson() => {'conceptId': conceptId, 'menuId': menuId};
-}
-
-/// Json path:
-/// ```
 /// response.response.schedule.displayProfileState
 /// ```
 class DisplayProfileState {
@@ -445,3 +407,4 @@ class Response extends BaseResponse {
 
   List<dynamic> toJson() => places?.map((e) => e?.toJson())?.toList();
 }
+

@@ -2,26 +2,6 @@ import 'base.dart';
 
 /// Json path:
 /// ```
-/// request.order.lineItems.price
-/// ```
-class Price {
-  // request.order.lineItems.price#currencyUnit
-  final String currencyUnit;
-  // request.order.lineItems.price#amount
-  final String amount;
-
-  Price({this.currencyUnit, this.amount});
-
-  Price.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
 /// request.order.lineItems.properties
 /// ```
 class Properties {
@@ -397,26 +377,6 @@ class TotalRoundAmount {
 
 /// Json path:
 /// ```
-/// request.order.taxBreakdown.salesTaxes.amount
-/// ```
-class Amount {
-  // request.order.taxBreakdown.salesTaxes.amount#currencyUnit
-  final String currencyUnit;
-  // request.order.taxBreakdown.salesTaxes.amount#amount
-  final String amount;
-
-  Amount({this.currencyUnit, this.amount});
-
-  Amount.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
 /// response.closedOrder.taxBreakdown.salesTaxes
 /// ```
 class SalesTaxes {
@@ -694,40 +654,6 @@ class Order {
 
 /// Json path:
 /// ```
-/// request.receiptInfo.currencyDetails
-/// ```
-class CurrencyDetails {
-  // request.receiptInfo.currencyDetails#currencyDecimalDigits
-  final String currencyDecimalDigits;
-  // request.receiptInfo.currencyDetails#currencyCultureName
-  final String currencyCultureName;
-  // request.receiptInfo.currencyDetails#currencyCode
-  final String currencyCode;
-  // request.receiptInfo.currencyDetails#currencySymbol
-  final String currencySymbol;
-
-  CurrencyDetails(
-      {this.currencyDecimalDigits,
-      this.currencyCultureName,
-      this.currencyCode,
-      this.currencySymbol});
-
-  CurrencyDetails.fromJson(Map<String, dynamic> json)
-      : currencyDecimalDigits = json['currencyDecimalDigits'],
-        currencyCultureName = json['currencyCultureName'],
-        currencyCode = json['currencyCode'],
-        currencySymbol = json['currencySymbol'];
-
-  Map<String, dynamic> toJson() => {
-        'currencyDecimalDigits': currencyDecimalDigits,
-        'currencyCultureName': currencyCultureName,
-        'currencyCode': currencyCode,
-        'currencySymbol': currencySymbol
-      };
-}
-
-/// Json path:
-/// ```
 /// request.igSettings
 /// ```
 class IgSettings {
@@ -964,29 +890,6 @@ class ScheduledOrderTime {
 
 /// Json path:
 /// ```
-/// request.atriumPaymentAccounts.accounts
-/// ```
-class Accounts {
-  // request.atriumPaymentAccounts.accounts#name
-  final String name;
-  // request.atriumPaymentAccounts.accounts#balance
-  final String balance;
-  // request.atriumPaymentAccounts.accounts#currency
-  final String currency;
-
-  Accounts({this.name, this.balance, this.currency});
-
-  Accounts.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
-        balance = json['balance'],
-        currency = json['currency'];
-
-  Map<String, dynamic> toJson() =>
-      {'name': name, 'balance': balance, 'currency': currency};
-}
-
-/// Json path:
-/// ```
 /// request.atriumPaymentAccounts.authResponse.paymentData.paymentRequest.paymentAction
 /// ```
 class PaymentAction {
@@ -1003,71 +906,6 @@ class PaymentAction {
 
   Map<String, dynamic> toJson() =>
       {'type': type, 'properties': properties?.toJson()};
-}
-
-/// Json path:
-/// ```
-/// request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumTerminal
-/// ```
-class AtriumTerminal {
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumTerminal#terminalId
-  final String terminalId;
-
-  AtriumTerminal({this.terminalId});
-
-  AtriumTerminal.fromJson(Map<String, dynamic> json)
-      : terminalId = json['terminalId'];
-
-  Map<String, dynamic> toJson() => {'terminalId': terminalId};
-}
-
-/// Json path:
-/// ```
-/// request.atriumPaymentAccounts.authResponse.paymentData.paymentRequest.transactionData.atriumPaymentRequest.customer
-/// ```
-class Customer {
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentRequest.transactionData.atriumPaymentRequest.customer#customerType
-  final String customerType;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentRequest.transactionData.atriumPaymentRequest.customer#id
-  final String id;
-
-  Customer({this.customerType, this.id});
-
-  Customer.fromJson(Map<String, dynamic> json)
-      : customerType = json['customerType'],
-        id = json['id'];
-
-  Map<String, dynamic> toJson() => {'customerType': customerType, 'id': id};
-}
-
-/// Json path:
-/// ```
-/// request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumCurrency
-/// ```
-class AtriumCurrency {
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumCurrency#currencyType
-  final String currencyType;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumCurrency#total
-  final String total;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumCurrency#tax
-  final String tax;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumCurrency#conversion
-  final dynamic conversion;
-
-  AtriumCurrency({this.currencyType, this.total, this.tax, this.conversion});
-
-  AtriumCurrency.fromJson(Map<String, dynamic> json)
-      : currencyType = json['currencyType'],
-        total = json['total'],
-        tax = json['tax'],
-        conversion = json['conversion'];
-
-  Map<String, dynamic> toJson() => {
-        'currencyType': currencyType,
-        'total': total,
-        'tax': tax,
-        'conversion': conversion
-      };
 }
 
 /// Json path:
@@ -1266,26 +1104,6 @@ class TipAmount {
 
 /// Json path:
 /// ```
-/// request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.paymentSupport.offlineStatus
-/// ```
-class OfflineStatus {
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.paymentSupport.offlineStatus#offline
-  final bool offline;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.paymentSupport.offlineStatus#offlineScopeId
-  final String offlineScopeId;
-
-  OfflineStatus({this.offline, this.offlineScopeId});
-
-  OfflineStatus.fromJson(Map<String, dynamic> json)
-      : offline = json['offline'],
-        offlineScopeId = json['offlineScopeId'];
-
-  Map<String, dynamic> toJson() =>
-      {'offline': offline, 'offlineScopeId': offlineScopeId};
-}
-
-/// Json path:
-/// ```
 /// request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.paymentSupport
 /// ```
 class PaymentSupport {
@@ -1393,26 +1211,6 @@ class PaymentData {
         'paymentRequest': paymentRequest?.toJson(),
         'paymentResponse': paymentResponse?.toJson()
       };
-}
-
-/// Json path:
-/// ```
-/// request.atriumPaymentAccounts.authResponse.digitalSignature
-/// ```
-class DigitalSignature {
-  // request.atriumPaymentAccounts.authResponse.digitalSignature#dataEncoding
-  final String dataEncoding;
-  // request.atriumPaymentAccounts.authResponse.digitalSignature#base64
-  final String base64;
-
-  DigitalSignature({this.dataEncoding, this.base64});
-
-  DigitalSignature.fromJson(Map<String, dynamic> json)
-      : dataEncoding = json['dataEncoding'],
-        base64 = json['base64'];
-
-  Map<String, dynamic> toJson() =>
-      {'dataEncoding': dataEncoding, 'base64': base64};
 }
 
 /// Json path:
@@ -1790,119 +1588,6 @@ class ItemImages {
         'name': name,
         'fileNames': fileNames,
         'tags': tags
-      };
-}
-
-/// Json path:
-/// ```
-/// request.receiptInfo.items.selectedModifiers
-/// ```
-class SelectedModifiers {
-  // request.receiptInfo.items.selectedModifiers#id
-  final String id;
-  // request.receiptInfo.items.selectedModifiers#description
-  final String description;
-  // request.receiptInfo.items.selectedModifiers#selected
-  final bool selected;
-  // request.receiptInfo.items.selectedModifiers#baseAmount
-  final String baseAmount;
-  // request.receiptInfo.items.selectedModifiers#amount
-  final String amount;
-  // request.receiptInfo.items.selectedModifiers#childPriceLevelId
-  final String childPriceLevelId;
-  // request.receiptInfo.items.selectedModifiers#parentGroupId
-  final String parentGroupId;
-  // request.receiptInfo.items.selectedModifiers#currencyUnit
-  final String currencyUnit;
-  // request.receiptInfo.items.selectedModifiers#lineItemId
-  final String lineItemId;
-
-  SelectedModifiers(
-      {this.id,
-      this.description,
-      this.selected,
-      this.baseAmount,
-      this.amount,
-      this.childPriceLevelId,
-      this.parentGroupId,
-      this.currencyUnit,
-      this.lineItemId});
-
-  SelectedModifiers.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        description = json['description'],
-        selected = json['selected'],
-        baseAmount = json['baseAmount'],
-        amount = json['amount'],
-        childPriceLevelId = json['childPriceLevelId'],
-        parentGroupId = json['parentGroupId'],
-        currencyUnit = json['currencyUnit'],
-        lineItemId = json['lineItemId'];
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'description': description,
-        'selected': selected,
-        'baseAmount': baseAmount,
-        'amount': amount,
-        'childPriceLevelId': childPriceLevelId,
-        'parentGroupId': parentGroupId,
-        'currencyUnit': currencyUnit,
-        'lineItemId': lineItemId
-      };
-}
-
-/// Json path:
-/// ```
-/// request.receiptInfo.items.modifiers.modifiers.options
-/// ```
-class Options {
-  // request.receiptInfo.items.modifiers.modifiers.options#id
-  final String id;
-  // request.receiptInfo.items.modifiers.modifiers.options#description
-  final String description;
-  // request.receiptInfo.items.modifiers.modifiers.options#selected
-  final bool selected;
-  // request.receiptInfo.items.modifiers.modifiers.options#baseAmount
-  final String baseAmount;
-  // request.receiptInfo.items.modifiers.modifiers.options#amount
-  final String amount;
-  // request.receiptInfo.items.modifiers.modifiers.options#childPriceLevelId
-  final String childPriceLevelId;
-  // request.receiptInfo.items.modifiers.modifiers.options#parentGroupId
-  final String parentGroupId;
-  // request.receiptInfo.items.modifiers.modifiers.options#currencyUnit
-  final String currencyUnit;
-
-  Options(
-      {this.id,
-      this.description,
-      this.selected,
-      this.baseAmount,
-      this.amount,
-      this.childPriceLevelId,
-      this.parentGroupId,
-      this.currencyUnit});
-
-  Options.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        description = json['description'],
-        selected = json['selected'],
-        baseAmount = json['baseAmount'],
-        amount = json['amount'],
-        childPriceLevelId = json['childPriceLevelId'],
-        parentGroupId = json['parentGroupId'],
-        currencyUnit = json['currencyUnit'];
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'description': description,
-        'selected': selected,
-        'baseAmount': baseAmount,
-        'amount': amount,
-        'childPriceLevelId': childPriceLevelId,
-        'parentGroupId': parentGroupId,
-        'currencyUnit': currencyUnit
       };
 }
 
@@ -2638,45 +2323,6 @@ class StoreInfo {
 
 /// Json path:
 /// ```
-/// response.closedOrder.receiptData.receiptJson.orderData.paymentInfo
-/// ```
-class PaymentInfo {
-  // response.closedOrder.receiptData.receiptJson.orderData.paymentInfo#buyPaymentForm
-  final String buyPaymentForm;
-  // response.closedOrder.receiptData.receiptJson.orderData.paymentInfo#showAuthorizationInfoOnReceipt
-  final bool showAuthorizationInfoOnReceipt;
-  // response.closedOrder.receiptData.receiptJson.orderData.paymentInfo#atriumLabel
-  final String atriumLabel;
-  // response.closedOrder.receiptData.receiptJson.orderData.paymentInfo#amountCharged
-  final String amountCharged;
-  // response.closedOrder.receiptData.receiptJson.orderData.paymentInfo#currentBalance
-  final String currentBalance;
-
-  PaymentInfo(
-      {this.buyPaymentForm,
-      this.showAuthorizationInfoOnReceipt,
-      this.atriumLabel,
-      this.amountCharged,
-      this.currentBalance});
-
-  PaymentInfo.fromJson(Map<String, dynamic> json)
-      : buyPaymentForm = json['buyPaymentForm'],
-        showAuthorizationInfoOnReceipt = json['showAuthorizationInfoOnReceipt'],
-        atriumLabel = json['atriumLabel'],
-        amountCharged = json['amountCharged'],
-        currentBalance = json['currentBalance'];
-
-  Map<String, dynamic> toJson() => {
-        'buyPaymentForm': buyPaymentForm,
-        'showAuthorizationInfoOnReceipt': showAuthorizationInfoOnReceipt,
-        'atriumLabel': atriumLabel,
-        'amountCharged': amountCharged,
-        'currentBalance': currentBalance
-      };
-}
-
-/// Json path:
-/// ```
 /// response.closedOrder.receiptData.receiptJson.orderData.currencyInfo
 /// ```
 class CurrencyInfo {
@@ -3012,3 +2658,4 @@ class Response extends BaseResponse {
 
   Map<String, dynamic> toJson() => {'closedOrder': closedOrder?.toJson()};
 }
+

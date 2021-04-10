@@ -190,25 +190,6 @@ class DisplayOptions {
 
 /// Json path:
 /// ```
-/// response.response.allAvailableList.availableAt.openWindowTimeFrames
-/// ```
-class OpenWindowTimeFrames {
-  // response.response.allAvailableList.availableAt.openWindowTimeFrames#opens
-  final String opens;
-  // response.response.allAvailableList.availableAt.openWindowTimeFrames#closes
-  final String closes;
-
-  OpenWindowTimeFrames({this.opens, this.closes});
-
-  OpenWindowTimeFrames.fromJson(Map<String, dynamic> json)
-      : opens = json['opens'],
-        closes = json['closes'];
-
-  Map<String, dynamic> toJson() => {'opens': opens, 'closes': closes};
-}
-
-/// Json path:
-/// ```
 /// response.response.allAvailableList.availableAt
 /// ```
 class AvailableAt {
@@ -275,26 +256,6 @@ class AllAvailableList {
 
   Map<String, dynamic> toJson() =>
       {'day': day, 'index': index, 'availableAt': availableAt?.toJson()};
-}
-
-/// Json path:
-/// ```
-/// response.response.atriumConfig.autoDeduct
-/// ```
-class AutoDeduct {
-  // response.response.atriumConfig.autoDeduct#displayName
-  final String displayName;
-  // response.response.atriumConfig.autoDeduct#isEnabled
-  final bool isEnabled;
-
-  AutoDeduct({this.displayName, this.isEnabled});
-
-  AutoDeduct.fromJson(Map<String, dynamic> json)
-      : displayName = json['displayName'],
-        isEnabled = json['isEnabled'];
-
-  Map<String, dynamic> toJson() =>
-      {'displayName': displayName, 'isEnabled': isEnabled};
 }
 
 /// Json path:
@@ -1238,22 +1199,6 @@ class GaDiscounts {
 
 /// Json path:
 /// ```
-/// response.response.storeInfo.logoDetails.RECEIPT_HEADER
-/// ```
-class ReceiptHeader {
-  // response.response.storeInfo.logoDetails.RECEIPT_HEADER#fileName
-  final String fileName;
-
-  ReceiptHeader({this.fileName});
-
-  ReceiptHeader.fromJson(Map<String, dynamic> json)
-      : fileName = json['fileName'];
-
-  Map<String, dynamic> toJson() => {'fileName': fileName};
-}
-
-/// Json path:
-/// ```
 /// response.response.storeInfo.logoDetails
 /// ```
 class LogoDetails {
@@ -1288,23 +1233,6 @@ class Properties {
         'selectedLanguage': selectedLanguage,
         'taxIdentificationNumber': taxIdentificationNumber
       };
-}
-
-/// Json path:
-/// ```
-/// response.response.storeInfo.storeInfoOptions
-/// ```
-class StoreInfoOptions {
-  // response.response.storeInfo.storeInfoOptions#enableMultiKitchenOperations
-  final bool enableMultiKitchenOperations;
-
-  StoreInfoOptions({this.enableMultiKitchenOperations});
-
-  StoreInfoOptions.fromJson(Map<String, dynamic> json)
-      : enableMultiKitchenOperations = json['enableMultiKitchenOperations'];
-
-  Map<String, dynamic> toJson() =>
-      {'enableMultiKitchenOperations': enableMultiKitchenOperations};
 }
 
 /// Json path:
@@ -1767,3 +1695,4 @@ class Response extends BaseResponse {
 
   List<dynamic> toJson() => kitchens?.map((e) => e?.toJson())?.toList();
 }
+

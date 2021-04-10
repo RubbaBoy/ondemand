@@ -136,3 +136,4 @@ class Response extends BaseResponse {
             kitchens?.map((e) => e.getKey()), kitchens?.map((e) => e?.toJson()))
       };
 }
+

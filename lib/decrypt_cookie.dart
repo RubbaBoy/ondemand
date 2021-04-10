@@ -93,3 +93,4 @@ class Response extends BaseResponse {
 
   Map<String, dynamic> toJson() => {'profile': profile?.toJson()};
 }
+

@@ -41,26 +41,6 @@ class Request extends BaseRequest {
 
 /// Json path:
 /// ```
-/// response.response.price
-/// ```
-class Price {
-  // response.response.price#currencyUnit
-  final String currencyUnit;
-  // response.response.price#amount
-  final String amount;
-
-  Price({this.currencyUnit, this.amount});
-
-  Price.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
 /// response.response.priceLevels[]
 /// ```
 class PriceLevel {
@@ -462,3 +442,4 @@ class Response extends BaseResponse {
 
   List<dynamic> toJson() => items?.map((e) => e?.toJson())?.toList();
 }
+

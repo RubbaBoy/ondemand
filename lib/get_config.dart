@@ -17,22 +17,6 @@ class Request extends BaseRequest {
 
 /// Json path:
 /// ```
-/// response.storeList.storeInfo.logoDetails.RECEIPT_HEADER
-/// ```
-class ReceiptHeader {
-  // response.storeList.storeInfo.logoDetails.RECEIPT_HEADER#fileName
-  final String fileName;
-
-  ReceiptHeader({this.fileName});
-
-  ReceiptHeader.fromJson(Map<String, dynamic> json)
-      : fileName = json['fileName'];
-
-  Map<String, dynamic> toJson() => {'fileName': fileName};
-}
-
-/// Json path:
-/// ```
 /// response.storeList.storeInfo.logoDetails
 /// ```
 class LogoDetails {
@@ -67,23 +51,6 @@ class Properties {
         'selectedLanguage': selectedLanguage,
         'taxIdentificationNumber': taxIdentificationNumber
       };
-}
-
-/// Json path:
-/// ```
-/// response.storeList.storeInfo.storeInfoOptions
-/// ```
-class StoreInfoOptions {
-  // response.storeList.storeInfo.storeInfoOptions#enableMultiKitchenOperations
-  final bool enableMultiKitchenOperations;
-
-  StoreInfoOptions({this.enableMultiKitchenOperations});
-
-  StoreInfoOptions.fromJson(Map<String, dynamic> json)
-      : enableMultiKitchenOperations = json['enableMultiKitchenOperations'];
-
-  Map<String, dynamic> toJson() =>
-      {'enableMultiKitchenOperations': enableMultiKitchenOperations};
 }
 
 /// Json path:
@@ -563,3 +530,4 @@ class Response extends BaseResponse {
         'enabledLocation': enabledLocation
       };
 }
+

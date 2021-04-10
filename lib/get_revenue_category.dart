@@ -84,3 +84,4 @@ class Response extends BaseResponse {
 
   List<dynamic> toJson() => categories?.map((e) => e?.toJson())?.toList();
 }
+

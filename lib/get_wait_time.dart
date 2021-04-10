@@ -2,26 +2,6 @@ import 'base.dart';
 
 /// Json path:
 /// ```
-/// request.cartItems.price
-/// ```
-class Price {
-  // request.cartItems.price#currencyUnit
-  final String currencyUnit;
-  // request.cartItems.price#amount
-  final String amount;
-
-  Price({this.currencyUnit, this.amount});
-
-  Price.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
 /// request.cartItems.priceLevels.1
 /// ```
 class Num1 {
@@ -111,119 +91,6 @@ class Properties {
   Properties.fromJson(Map<String, dynamic> json) : cartGuid = json['cartGuid'];
 
   Map<String, dynamic> toJson() => {'cartGuid': cartGuid};
-}
-
-/// Json path:
-/// ```
-/// request.cartItems.selectedModifiers
-/// ```
-class SelectedModifiers {
-  // request.cartItems.selectedModifiers#id
-  final String id;
-  // request.cartItems.selectedModifiers#description
-  final String description;
-  // request.cartItems.selectedModifiers#selected
-  final bool selected;
-  // request.cartItems.selectedModifiers#baseAmount
-  final String baseAmount;
-  // request.cartItems.selectedModifiers#amount
-  final String amount;
-  // request.cartItems.selectedModifiers#childPriceLevelId
-  final String childPriceLevelId;
-  // request.cartItems.selectedModifiers#parentGroupId
-  final String parentGroupId;
-  // request.cartItems.selectedModifiers#currencyUnit
-  final String currencyUnit;
-  // request.cartItems.selectedModifiers#lineItemId
-  final String lineItemId;
-
-  SelectedModifiers(
-      {this.id,
-      this.description,
-      this.selected,
-      this.baseAmount,
-      this.amount,
-      this.childPriceLevelId,
-      this.parentGroupId,
-      this.currencyUnit,
-      this.lineItemId});
-
-  SelectedModifiers.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        description = json['description'],
-        selected = json['selected'],
-        baseAmount = json['baseAmount'],
-        amount = json['amount'],
-        childPriceLevelId = json['childPriceLevelId'],
-        parentGroupId = json['parentGroupId'],
-        currencyUnit = json['currencyUnit'],
-        lineItemId = json['lineItemId'];
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'description': description,
-        'selected': selected,
-        'baseAmount': baseAmount,
-        'amount': amount,
-        'childPriceLevelId': childPriceLevelId,
-        'parentGroupId': parentGroupId,
-        'currencyUnit': currencyUnit,
-        'lineItemId': lineItemId
-      };
-}
-
-/// Json path:
-/// ```
-/// request.cartItems.modifiers.modifiers.options
-/// ```
-class Options {
-  // request.cartItems.modifiers.modifiers.options#id
-  final String id;
-  // request.cartItems.modifiers.modifiers.options#description
-  final String description;
-  // request.cartItems.modifiers.modifiers.options#selected
-  final bool selected;
-  // request.cartItems.modifiers.modifiers.options#baseAmount
-  final String baseAmount;
-  // request.cartItems.modifiers.modifiers.options#amount
-  final String amount;
-  // request.cartItems.modifiers.modifiers.options#childPriceLevelId
-  final String childPriceLevelId;
-  // request.cartItems.modifiers.modifiers.options#parentGroupId
-  final String parentGroupId;
-  // request.cartItems.modifiers.modifiers.options#currencyUnit
-  final String currencyUnit;
-
-  Options(
-      {this.id,
-      this.description,
-      this.selected,
-      this.baseAmount,
-      this.amount,
-      this.childPriceLevelId,
-      this.parentGroupId,
-      this.currencyUnit});
-
-  Options.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        description = json['description'],
-        selected = json['selected'],
-        baseAmount = json['baseAmount'],
-        amount = json['amount'],
-        childPriceLevelId = json['childPriceLevelId'],
-        parentGroupId = json['parentGroupId'],
-        currencyUnit = json['currencyUnit'];
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'description': description,
-        'selected': selected,
-        'baseAmount': baseAmount,
-        'amount': amount,
-        'childPriceLevelId': childPriceLevelId,
-        'parentGroupId': parentGroupId,
-        'currencyUnit': currencyUnit
-      };
 }
 
 /// Json path:
@@ -612,21 +479,6 @@ class Request extends BaseRequest {
 
 /// Json path:
 /// ```
-/// response.maxTime.periodType
-/// ```
-class PeriodType {
-  // response.maxTime.periodType#name
-  final String name;
-
-  PeriodType({this.name});
-
-  PeriodType.fromJson(Map<String, dynamic> json) : name = json['name'];
-
-  Map<String, dynamic> toJson() => {'name': name};
-}
-
-/// Json path:
-/// ```
 /// response.maxTime.fieldType
 /// ```
 class FieldType {
@@ -715,3 +567,4 @@ class Response extends BaseResponse {
   Map<String, dynamic> toJson() =>
       {'minTime': minTime?.toJson(), 'maxTime': maxTime?.toJson()};
 }
+

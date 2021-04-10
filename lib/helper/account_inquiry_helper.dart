@@ -21,9 +21,9 @@ Future<List<_account_inquiry.InquiryResponse>> makeInquiry(
           // Another (different) constant ID for dining dollars
           tenderId: tender.dataId,
           // The terminal the quest is being made to (what terminal doesn't matter)
-          atriumTerminal: _account_inquiry.AtriumTerminal(terminalId: terminalId),
+          atriumTerminal: AtriumTerminal(terminalId: terminalId),
           // Who this request is being made for
-          customer: _account_inquiry.Customer(
+          customer: Customer(
             customerType: CUSTOMER_TYPE_UID,
             id: uid,
           ),

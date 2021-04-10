@@ -76,3 +76,4 @@ class Response extends BaseResponse {
             tenders?.map((e) => e.getKey()), tenders?.map((e) => e?.toJson()))
       };
 }
+

@@ -2,59 +2,6 @@ import 'base.dart';
 
 /// Json path:
 /// ```
-/// request.atriumAccount.amount
-/// ```
-class Amount {
-  // request.atriumAccount.amount#remaining
-  final String remaining;
-  // request.atriumAccount.amount#currency
-  final String currency;
-  // request.atriumAccount.amount#applied
-  final String applied;
-  // request.atriumAccount.amount#total
-  final String total;
-
-  Amount({this.remaining, this.currency, this.applied, this.total});
-
-  Amount.fromJson(Map<String, dynamic> json)
-      : remaining = json['remaining'],
-        currency = json['currency'],
-        applied = json['applied'],
-        total = json['total'];
-
-  Map<String, dynamic> toJson() => {
-        'remaining': remaining,
-        'currency': currency,
-        'applied': applied,
-        'total': total
-      };
-}
-
-/// Json path:
-/// ```
-/// request.atriumAccount.accounts
-/// ```
-class Accounts {
-  // request.atriumAccount.accounts#name
-  final String name;
-  // request.atriumAccount.accounts#balance
-  final String balance;
-  // request.atriumAccount.accounts#currency
-  final String currency;
-
-  Accounts({this.name, this.balance, this.currency});
-
-  Accounts.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
-        balance = json['balance'],
-        currency = json['currency'];
-
-  Map<String, dynamic> toJson() =>
-      {'name': name, 'balance': balance, 'currency': currency};
-}
-
-/// Json path:
-/// ```
 /// request.atriumAccount
 /// ```
 class AtriumAccount {
@@ -176,40 +123,6 @@ class AtriumAccount {
         'displayLabel': displayLabel,
         'instructionText': instructionText,
         'valid': valid
-      };
-}
-
-/// Json path:
-/// ```
-/// request.currencyDetails
-/// ```
-class CurrencyDetails {
-  // request.currencyDetails#currencyDecimalDigits
-  final String currencyDecimalDigits;
-  // request.currencyDetails#currencyCultureName
-  final String currencyCultureName;
-  // request.currencyDetails#currencyCode
-  final String currencyCode;
-  // request.currencyDetails#currencySymbol
-  final String currencySymbol;
-
-  CurrencyDetails(
-      {this.currencyDecimalDigits,
-      this.currencyCultureName,
-      this.currencyCode,
-      this.currencySymbol});
-
-  CurrencyDetails.fromJson(Map<String, dynamic> json)
-      : currencyDecimalDigits = json['currencyDecimalDigits'],
-        currencyCultureName = json['currencyCultureName'],
-        currencyCode = json['currencyCode'],
-        currencySymbol = json['currencySymbol'];
-
-  Map<String, dynamic> toJson() => {
-        'currencyDecimalDigits': currencyDecimalDigits,
-        'currencyCultureName': currencyCultureName,
-        'currencyCode': currencyCode,
-        'currencySymbol': currencySymbol
       };
 }
 
@@ -383,71 +296,6 @@ class PaymentAction {
 
   Map<String, dynamic> toJson() =>
       {'type': type, 'properties': properties?.toJson()};
-}
-
-/// Json path:
-/// ```
-/// response.data.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumTerminal
-/// ```
-class AtriumTerminal {
-  // response.data.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumTerminal#terminalId
-  final String terminalId;
-
-  AtriumTerminal({this.terminalId});
-
-  AtriumTerminal.fromJson(Map<String, dynamic> json)
-      : terminalId = json['terminalId'];
-
-  Map<String, dynamic> toJson() => {'terminalId': terminalId};
-}
-
-/// Json path:
-/// ```
-/// response.data.paymentData.paymentRequest.transactionData.atriumPaymentRequest.customer
-/// ```
-class Customer {
-  // response.data.paymentData.paymentRequest.transactionData.atriumPaymentRequest.customer#customerType
-  final String customerType;
-  // response.data.paymentData.paymentRequest.transactionData.atriumPaymentRequest.customer#id
-  final String id;
-
-  Customer({this.customerType, this.id});
-
-  Customer.fromJson(Map<String, dynamic> json)
-      : customerType = json['customerType'],
-        id = json['id'];
-
-  Map<String, dynamic> toJson() => {'customerType': customerType, 'id': id};
-}
-
-/// Json path:
-/// ```
-/// response.data.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumCurrency
-/// ```
-class AtriumCurrency {
-  // response.data.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumCurrency#currencyType
-  final String currencyType;
-  // response.data.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumCurrency#total
-  final String total;
-  // response.data.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumCurrency#tax
-  final String tax;
-  // response.data.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumCurrency#conversion
-  final dynamic conversion;
-
-  AtriumCurrency({this.currencyType, this.total, this.tax, this.conversion});
-
-  AtriumCurrency.fromJson(Map<String, dynamic> json)
-      : currencyType = json['currencyType'],
-        total = json['total'],
-        tax = json['tax'],
-        conversion = json['conversion'];
-
-  Map<String, dynamic> toJson() => {
-        'currencyType': currencyType,
-        'total': total,
-        'tax': tax,
-        'conversion': conversion
-      };
 }
 
 /// Json path:
@@ -646,26 +494,6 @@ class TipAmount {
 
 /// Json path:
 /// ```
-/// response.data.paymentData.paymentResponse.paymentSupport.offlineStatus
-/// ```
-class OfflineStatus {
-  // response.data.paymentData.paymentResponse.paymentSupport.offlineStatus#offline
-  final bool offline;
-  // response.data.paymentData.paymentResponse.paymentSupport.offlineStatus#offlineScopeId
-  final String offlineScopeId;
-
-  OfflineStatus({this.offline, this.offlineScopeId});
-
-  OfflineStatus.fromJson(Map<String, dynamic> json)
-      : offline = json['offline'],
-        offlineScopeId = json['offlineScopeId'];
-
-  Map<String, dynamic> toJson() =>
-      {'offline': offline, 'offlineScopeId': offlineScopeId};
-}
-
-/// Json path:
-/// ```
 /// response.data.paymentData.paymentResponse.paymentSupport
 /// ```
 class PaymentSupport {
@@ -777,26 +605,6 @@ class PaymentData {
 
 /// Json path:
 /// ```
-/// response.data.digitalSignature
-/// ```
-class DigitalSignature {
-  // response.data.digitalSignature#dataEncoding
-  final String dataEncoding;
-  // response.data.digitalSignature#base64
-  final String base64;
-
-  DigitalSignature({this.dataEncoding, this.base64});
-
-  DigitalSignature.fromJson(Map<String, dynamic> json)
-      : dataEncoding = json['dataEncoding'],
-        base64 = json['base64'];
-
-  Map<String, dynamic> toJson() =>
-      {'dataEncoding': dataEncoding, 'base64': base64};
-}
-
-/// Json path:
-/// ```
 /// response.data
 /// ```
 class Data {
@@ -856,3 +664,4 @@ class Response extends BaseResponse {
         'data': data?.toJson()
       };
 }
+

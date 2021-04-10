@@ -125,25 +125,6 @@ class Properties {
 
 /// Json path:
 /// ```
-/// request.schedule.displayProfileState.conceptStates
-/// ```
-class ConceptStates {
-  // request.schedule.displayProfileState.conceptStates#conceptId
-  final String conceptId;
-  // request.schedule.displayProfileState.conceptStates#menuId
-  final String menuId;
-
-  ConceptStates({this.conceptId, this.menuId});
-
-  ConceptStates.fromJson(Map<String, dynamic> json)
-      : conceptId = json['conceptId'],
-        menuId = json['menuId'];
-
-  Map<String, dynamic> toJson() => {'conceptId': conceptId, 'menuId': menuId};
-}
-
-/// Json path:
-/// ```
 /// request.schedule.displayProfileState
 /// ```
 class DisplayProfileState {
@@ -201,25 +182,6 @@ class Schedule {
       };
 }
 
-/// Json path:
-/// ```
-/// request.scheduleTime
-/// ```
-class ScheduleTime {
-  // request.scheduleTime#startTime
-  final String startTime;
-  // request.scheduleTime#endTime
-  final String endTime;
-
-  ScheduleTime({this.startTime, this.endTime});
-
-  ScheduleTime.fromJson(Map<String, dynamic> json)
-      : startTime = json['startTime'],
-        endTime = json['endTime'];
-
-  Map<String, dynamic> toJson() => {'startTime': startTime, 'endTime': endTime};
-}
-
 /// Url: https://ondemand.rit.edu/api/sites/1312/dc9df36d-8a64-42cf-b7c1-fa041f5f3cfd/concepts/2162/menus/3403
 /// Method: POST
 /// Json path:
@@ -271,25 +233,6 @@ class Request extends BaseRequest {
         'scheduledDay': scheduledDay,
         'currencyUnit': currencyUnit
       };
-}
-
-/// Json path:
-/// ```
-/// response.response.customLabels.New
-/// ```
-class NewField {
-  // response.response.customLabels.New#tagName
-  final String tagName;
-  // response.response.customLabels.New#isDefault
-  final bool isDefault;
-
-  NewField({this.tagName, this.isDefault});
-
-  NewField.fromJson(Map<String, dynamic> json)
-      : tagName = json['tagName'],
-        isDefault = json['isDefault'];
-
-  Map<String, dynamic> toJson() => {'tagName': tagName, 'isDefault': isDefault};
 }
 
 /// Json path:
@@ -450,3 +393,4 @@ class Response extends BaseResponse {
 
   List<dynamic> toJson() => menus?.map((e) => e?.toJson())?.toList();
 }
+

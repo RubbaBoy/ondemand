@@ -2,41 +2,6 @@ import 'base.dart';
 
 /// Json path:
 /// ```
-/// request.request.data.atriumTerminal
-/// ```
-class AtriumTerminal {
-  // request.request.data.atriumTerminal#terminalId
-  final String terminalId;
-
-  AtriumTerminal({this.terminalId});
-
-  AtriumTerminal.fromJson(Map<String, dynamic> json)
-      : terminalId = json['terminalId'];
-
-  Map<String, dynamic> toJson() => {'terminalId': terminalId};
-}
-
-/// Json path:
-/// ```
-/// request.request.data.customer
-/// ```
-class Customer {
-  // request.request.data.customer#customerType
-  final String customerType;
-  // request.request.data.customer#id
-  final String id;
-
-  Customer({this.customerType, this.id});
-
-  Customer.fromJson(Map<String, dynamic> json)
-      : customerType = json['customerType'],
-        id = json['id'];
-
-  Map<String, dynamic> toJson() => {'customerType': customerType, 'id': id};
-}
-
-/// Json path:
-/// ```
 /// request.request.data
 /// ```
 class Data {
@@ -113,59 +78,6 @@ class Request extends BaseRequest {
         super(headers);
 
   List<dynamic> toJson() => inquiries?.map((e) => e?.toJson())?.toList();
-}
-
-/// Json path:
-/// ```
-/// response.response.amount
-/// ```
-class Amount {
-  // response.response.amount#remaining
-  final String remaining;
-  // response.response.amount#currency
-  final String currency;
-  // response.response.amount#applied
-  final String applied;
-  // response.response.amount#total
-  final String total;
-
-  Amount({this.remaining, this.currency, this.applied, this.total});
-
-  Amount.fromJson(Map<String, dynamic> json)
-      : remaining = json['remaining'],
-        currency = json['currency'],
-        applied = json['applied'],
-        total = json['total'];
-
-  Map<String, dynamic> toJson() => {
-        'remaining': remaining,
-        'currency': currency,
-        'applied': applied,
-        'total': total
-      };
-}
-
-/// Json path:
-/// ```
-/// response.response.accounts
-/// ```
-class Accounts {
-  // response.response.accounts#name
-  final String name;
-  // response.response.accounts#balance
-  final String balance;
-  // response.response.accounts#currency
-  final String currency;
-
-  Accounts({this.name, this.balance, this.currency});
-
-  Accounts.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
-        balance = json['balance'],
-        currency = json['currency'];
-
-  Map<String, dynamic> toJson() =>
-      {'name': name, 'balance': balance, 'currency': currency};
 }
 
 /// Json path:
@@ -255,3 +167,4 @@ class Response extends BaseResponse {
 
   List<dynamic> toJson() => inquiries?.map((e) => e?.toJson())?.toList();
 }
+

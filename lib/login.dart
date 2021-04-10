@@ -28,3 +28,4 @@ class Response extends BaseResponse {
 
   Map<String, dynamic> toJson() => {};
 }
+

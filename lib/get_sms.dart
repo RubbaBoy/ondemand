@@ -75,45 +75,6 @@ class LineItems {
 
 /// Json path:
 /// ```
-/// request.orderData.paymentInfo
-/// ```
-class PaymentInfo {
-  // request.orderData.paymentInfo#buyPaymentForm
-  final String buyPaymentForm;
-  // request.orderData.paymentInfo#showAuthorizationInfoOnReceipt
-  final bool showAuthorizationInfoOnReceipt;
-  // request.orderData.paymentInfo#atriumLabel
-  final String atriumLabel;
-  // request.orderData.paymentInfo#amountCharged
-  final String amountCharged;
-  // request.orderData.paymentInfo#currentBalance
-  final String currentBalance;
-
-  PaymentInfo(
-      {this.buyPaymentForm,
-      this.showAuthorizationInfoOnReceipt,
-      this.atriumLabel,
-      this.amountCharged,
-      this.currentBalance});
-
-  PaymentInfo.fromJson(Map<String, dynamic> json)
-      : buyPaymentForm = json['buyPaymentForm'],
-        showAuthorizationInfoOnReceipt = json['showAuthorizationInfoOnReceipt'],
-        atriumLabel = json['atriumLabel'],
-        amountCharged = json['amountCharged'],
-        currentBalance = json['currentBalance'];
-
-  Map<String, dynamic> toJson() => {
-        'buyPaymentForm': buyPaymentForm,
-        'showAuthorizationInfoOnReceipt': showAuthorizationInfoOnReceipt,
-        'atriumLabel': atriumLabel,
-        'amountCharged': amountCharged,
-        'currentBalance': currentBalance
-      };
-}
-
-/// Json path:
-/// ```
 /// request.orderData.smsReceiptOption
 /// ```
 class SmsReceiptOption {
@@ -133,22 +94,6 @@ class SmsReceiptOption {
 
   Map<String, dynamic> toJson() =>
       {'smsHeader': smsHeader, 'smsBody': smsBody, 'smsFooter': smsFooter};
-}
-
-/// Json path:
-/// ```
-/// request.orderData.storeInfo.logoDetails.RECEIPT_HEADER
-/// ```
-class ReceiptHeader {
-  // request.orderData.storeInfo.logoDetails.RECEIPT_HEADER#fileName
-  final String fileName;
-
-  ReceiptHeader({this.fileName});
-
-  ReceiptHeader.fromJson(Map<String, dynamic> json)
-      : fileName = json['fileName'];
-
-  Map<String, dynamic> toJson() => {'fileName': fileName};
 }
 
 /// Json path:
@@ -187,23 +132,6 @@ class Properties {
         'selectedLanguage': selectedLanguage,
         'taxIdentificationNumber': taxIdentificationNumber
       };
-}
-
-/// Json path:
-/// ```
-/// request.orderData.storeInfo.storeInfoOptions
-/// ```
-class StoreInfoOptions {
-  // request.orderData.storeInfo.storeInfoOptions#enableMultiKitchenOperations
-  final bool enableMultiKitchenOperations;
-
-  StoreInfoOptions({this.enableMultiKitchenOperations});
-
-  StoreInfoOptions.fromJson(Map<String, dynamic> json)
-      : enableMultiKitchenOperations = json['enableMultiKitchenOperations'];
-
-  Map<String, dynamic> toJson() =>
-      {'enableMultiKitchenOperations': enableMultiKitchenOperations};
 }
 
 /// Json path:
@@ -471,3 +399,4 @@ class Response extends BaseResponse {
 
   Map<String, dynamic> toJson() => {'receipt': receipt, 'imageType': imageType};
 }
+

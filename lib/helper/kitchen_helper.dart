@@ -8,15 +8,10 @@ import 'package:ondemand/ondemand.dart';
 /// kitchens. [startTime] and [endTime] should be in the same format as
 /// `7:15 pm` or `12:03 am` for example.
 Future<MenuResponse> getMenu(OnDemand onDemand, _get_kitchens.Kitchen kitchen, [String startTime, String endTime]) async {
-  // TODO: Combine like classes!
-  _list_places.ScheduleTime scheduledTime;
-  _get_menus.ScheduleTime scheduledTime2;
+  ScheduleTime scheduledTime;
 
   if (startTime != null && endTime != null) {
-    scheduledTime = _list_places.ScheduleTime(
-        startTime: startTime, endTime: endTime);
-
-    scheduledTime2 = _get_menus.ScheduleTime(
+    scheduledTime = ScheduleTime(
         startTime: startTime, endTime: endTime);
   }
 
@@ -35,7 +30,7 @@ Future<MenuResponse> getMenu(OnDemand onDemand, _get_kitchens.Kitchen kitchen, [
           menus: place.menus
               .map((e) => _get_menus.Menu.fromJson(e.toJson()))
               .toList(),
-          scheduleTime: scheduledTime2,
+          scheduleTime: scheduledTime,
           schedule: place.schedule
               .map((e) => _get_menus.Schedule.fromJson(e.toJson()))
               .toList(),
