@@ -153,63 +153,12 @@ class ScheduleTime {
 
 /// Json path:
 /// ```
-/// response.response.menus.categories.categoryOptions
-/// ```
-class CategoryOptions {
-  CategoryOptions.fromJson(Map<String, dynamic> json);
-
-  Map<String, dynamic> toJson() => {};
-}
-
-/// Json path:
-/// ```
 /// response.response.menus.categories.itemIdToItemPropertiesMap
 /// ```
 class ItemIdToItemPropertiesMap {
   ItemIdToItemPropertiesMap.fromJson(Map<String, dynamic> json);
 
   Map<String, dynamic> toJson() => {};
-}
-
-/// Json path:
-/// ```
-/// response.response.menus.categories
-/// ```
-class Categories {
-  // response.response.menus.categories#name
-  final String name;
-  // response.response.menus.categories#categoryOptions
-  final CategoryOptions categoryOptions;
-  // response.response.menus.categories#items
-  final List<String> items;
-  // response.response.menus.categories#itemIdToItemPropertiesMap
-  final ItemIdToItemPropertiesMap itemIdToItemPropertiesMap;
-  // response.response.menus.categories#kioskImages
-  final List<dynamic> kioskImages;
-
-  Categories(
-      {this.name,
-      this.categoryOptions,
-      this.items,
-      this.itemIdToItemPropertiesMap,
-      this.kioskImages});
-
-  Categories.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
-        categoryOptions =
-            CategoryOptions.fromJson(json['categoryOptions'] ?? {}),
-        items = json['items']?.cast<String>(),
-        itemIdToItemPropertiesMap = ItemIdToItemPropertiesMap.fromJson(
-            json['itemIdToItemPropertiesMap'] ?? {}),
-        kioskImages = json['kioskImages'];
-
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'categoryOptions': categoryOptions?.toJson(),
-        'items': items,
-        'itemIdToItemPropertiesMap': itemIdToItemPropertiesMap?.toJson(),
-        'kioskImages': kioskImages
-      };
 }
 
 /// Json path:
@@ -308,32 +257,6 @@ class MenuSchedule {
 
 /// Json path:
 /// ```
-/// response.childGroups.childItems.priceLevels[]
-/// ```
-class PriceLevelsNum {
-  // response.childGroups.childItems.priceLevels[]#key
-  final String key;
-  // response.childGroups.childItems.priceLevels[]#priceLevelId
-  final String priceLevelId;
-  // response.childGroups.childItems.priceLevels[]#name
-  final String name;
-  // response.childGroups.childItems.priceLevels[]#price
-  final Price price;
-
-  PriceLevelsNum({this.key, this.priceLevelId, this.name, this.price});
-  String getKey() => key;
-
-  PriceLevelsNum.fromJson(this.key, Map<String, dynamic> json)
-      : priceLevelId = json['priceLevelId'],
-        name = json['name'],
-        price = Price.fromJson(json['price'] ?? {});
-
-  Map<String, dynamic> toJson() =>
-      {'priceLevelId': priceLevelId, 'name': name, 'price': price?.toJson()};
-}
-
-/// Json path:
-/// ```
 /// response.modifiers.modifiers.options
 /// ```
 class Options {
@@ -388,14 +311,14 @@ class Options {
 
 /// Json path:
 /// ```
-/// response.addedItem.priceLevels.1
+/// request.item.priceLevels.1
 /// ```
 class Num1 {
-  // response.addedItem.priceLevels.1#priceLevelId
+  // request.item.priceLevels.1#priceLevelId
   final String priceLevelId;
-  // response.addedItem.priceLevels.1#name
+  // request.item.priceLevels.1#name
   final String name;
-  // response.addedItem.priceLevels.1#price
+  // request.item.priceLevels.1#price
   final Price price;
 
   Num1({this.priceLevelId, this.name, this.price});
@@ -1060,6 +983,66 @@ class CurrencyInfo {
       };
 }
 
+class PriceLevels {
+  // response.response.priceLevels#priceLevels
+  final List<PriceLevel> priceLevels;
+
+  PriceLevels({this.priceLevels});
+
+  PriceLevels.fromJson(Map<String, dynamic> json)
+      : priceLevels = json.keys
+            .map((e) => PriceLevel.fromJson(e, json[e] ?? {}))
+            .toList();
+
+  Map<String, dynamic> toJson() => {
+        'priceLevels': Map.fromIterables(priceLevels?.map((e) => e.getKey()),
+            priceLevels?.map((e) => e?.toJson()))
+      };
+}
+
+class CategoryOptions {
+  CategoryOptions.fromJson(Map<String, dynamic> json);
+
+  Map<String, dynamic> toJson() => {};
+}
+
+class Categories {
+  // response.response.menus.categories#name
+  final String name;
+  // response.response.menus.categories#categoryOptions
+  final CategoryOptions categoryOptions;
+  // response.response.menus.categories#items
+  final List<String> items;
+  // response.response.menus.categories#itemIdToItemPropertiesMap
+  final ItemIdToItemPropertiesMap itemIdToItemPropertiesMap;
+  // response.response.menus.categories#kioskImages
+  final List<dynamic> kioskImages;
+
+  Categories(
+      {this.name,
+      this.categoryOptions,
+      this.items,
+      this.itemIdToItemPropertiesMap,
+      this.kioskImages});
+
+  Categories.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        categoryOptions =
+            CategoryOptions.fromJson(json['categoryOptions'] ?? {}),
+        items = json['items']?.cast<String>(),
+        itemIdToItemPropertiesMap = ItemIdToItemPropertiesMap.fromJson(
+            json['itemIdToItemPropertiesMap'] ?? {}),
+        kioskImages = json['kioskImages'];
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'categoryOptions': categoryOptions?.toJson(),
+        'items': items,
+        'itemIdToItemPropertiesMap': itemIdToItemPropertiesMap?.toJson(),
+        'kioskImages': kioskImages
+      };
+}
+
 class Menu {
   // response.response#name
   final String name;
@@ -1229,5 +1212,275 @@ class CustomLabels {
         'Gluten Free': glutenFree?.toJson(),
         'Healthy': healthy?.toJson(),
         'Vegan': vegan?.toJson()
+      };
+}
+
+class Item {
+  // request.item#id
+  final String id;
+  // request.item#contextId
+  final String contextId;
+  // request.item#tenantId
+  final String tenantId;
+  // request.item#itemId
+  final String itemId;
+  // request.item#name
+  final String name;
+  // request.item#isDeleted
+  final bool isDeleted;
+  // request.item#isActive
+  final bool isActive;
+  // request.item#lastUpdateTime
+  final String lastUpdateTime;
+  // request.item#revenueCategoryId
+  final String revenueCategoryId;
+  // request.item#productClassId
+  final String productClassId;
+  // request.item#kpText
+  final String kpText;
+  // request.item#kitchenDisplayText
+  final String kitchenDisplayText;
+  // request.item#receiptText
+  final String receiptText;
+  // request.item#price
+  final Price price;
+  // request.item#defaultPriceLevelId
+  final String defaultPriceLevelId;
+  // request.item#priceLevels
+  final PriceLevels priceLevels;
+  // request.item#isSoldByWeight
+  final bool isSoldByWeight;
+  // request.item#tareWeight
+  final int tareWeight;
+  // request.item#isDiscountable
+  final bool isDiscountable;
+  // request.item#allowPriceOverride
+  final bool allowPriceOverride;
+  // request.item#isTaxIncluded
+  final bool isTaxIncluded;
+  // request.item#taxClasses
+  final List<String> taxClasses;
+  // request.item#kitchenVideoLabel
+  final String kitchenVideoLabel;
+  // request.item#kitchenVideoId
+  final String kitchenVideoId;
+  // request.item#kitchenVideoCategoryId
+  final int kitchenVideoCategoryId;
+  // request.item#kitchenCookTimeSeconds
+  final int kitchenCookTimeSeconds;
+  // request.item#skus
+  final List<dynamic> skus;
+  // request.item#itemType
+  final String itemType;
+  // request.item#displayText
+  final String displayText;
+  // request.item#itemImages
+  final List<ItemImages> itemImages;
+  // request.item#isAvailableToGuests
+  final bool isAvailableToGuests;
+  // request.item#isPreselectedToGuests
+  final bool isPreselectedToGuests;
+  // request.item#tagNames
+  final List<dynamic> tagNames;
+  // request.item#tagIds
+  final List<dynamic> tagIds;
+  // request.item#substituteItemId
+  final String substituteItemId;
+  // request.item#isSubstituteItem
+  final bool isSubstituteItem;
+  // request.item#properties
+  final CartProperties properties;
+  // request.item#amount
+  final String amount;
+  // request.item#image
+  final String image;
+  // request.item#thumbnail
+  final String thumbnail;
+  // request.item#options
+  final List<dynamic> options;
+  // request.item#attributes
+  final List<dynamic> attributes;
+  // request.item#conceptId
+  final String conceptId;
+  // request.item#count
+  final int count;
+  // request.item#quantity
+  final int quantity;
+  // request.item#selectedModifiers
+  final List<SelectedModifiers> selectedModifiers;
+  // request.item#splInstruction
+  final String splInstruction;
+  // request.item#modifierTotal
+  final int modifierTotal;
+  // request.item#mealPeriodId
+  final dynamic mealPeriodId;
+  // request.item#uniqueId
+  final String uniqueId;
+  // request.item#cartItemId
+  final String cartItemId;
+
+  Item(
+      {this.id,
+      this.contextId,
+      this.tenantId,
+      this.itemId,
+      this.name,
+      this.isDeleted,
+      this.isActive,
+      this.lastUpdateTime,
+      this.revenueCategoryId,
+      this.productClassId,
+      this.kpText,
+      this.kitchenDisplayText,
+      this.receiptText,
+      this.price,
+      this.defaultPriceLevelId,
+      this.priceLevels,
+      this.isSoldByWeight,
+      this.tareWeight,
+      this.isDiscountable,
+      this.allowPriceOverride,
+      this.isTaxIncluded,
+      this.taxClasses,
+      this.kitchenVideoLabel,
+      this.kitchenVideoId,
+      this.kitchenVideoCategoryId,
+      this.kitchenCookTimeSeconds,
+      this.skus,
+      this.itemType,
+      this.displayText,
+      this.itemImages,
+      this.isAvailableToGuests,
+      this.isPreselectedToGuests,
+      this.tagNames,
+      this.tagIds,
+      this.substituteItemId,
+      this.isSubstituteItem,
+      this.properties,
+      this.amount,
+      this.image,
+      this.thumbnail,
+      this.options,
+      this.attributes,
+      this.conceptId,
+      this.count,
+      this.quantity,
+      this.selectedModifiers,
+      this.splInstruction,
+      this.modifierTotal,
+      this.mealPeriodId,
+      this.uniqueId,
+      this.cartItemId});
+
+  Item.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        contextId = json['contextId'],
+        tenantId = json['tenantId'],
+        itemId = json['itemId'],
+        name = json['name'],
+        isDeleted = json['isDeleted'],
+        isActive = json['isActive'],
+        lastUpdateTime = json['lastUpdateTime'],
+        revenueCategoryId = json['revenueCategoryId'],
+        productClassId = json['productClassId'],
+        kpText = json['kpText'],
+        kitchenDisplayText = json['kitchenDisplayText'],
+        receiptText = json['receiptText'],
+        price = Price.fromJson(json['price'] ?? {}),
+        defaultPriceLevelId = json['defaultPriceLevelId'],
+        priceLevels = PriceLevels.fromJson(json['priceLevels'] ?? {}),
+        isSoldByWeight = json['isSoldByWeight'],
+        tareWeight = json['tareWeight'],
+        isDiscountable = json['isDiscountable'],
+        allowPriceOverride = json['allowPriceOverride'],
+        isTaxIncluded = json['isTaxIncluded'],
+        taxClasses = json['taxClasses']?.cast<String>(),
+        kitchenVideoLabel = json['kitchenVideoLabel'],
+        kitchenVideoId = json['kitchenVideoId'],
+        kitchenVideoCategoryId = json['kitchenVideoCategoryId'],
+        kitchenCookTimeSeconds = json['kitchenCookTimeSeconds'],
+        skus = json['skus'],
+        itemType = json['itemType'],
+        displayText = json['displayText'],
+        itemImages = (json['itemImages'] as List)
+            ?.map((e) => ItemImages.fromJson(e ?? {}))
+            ?.toList(),
+        isAvailableToGuests = json['isAvailableToGuests'],
+        isPreselectedToGuests = json['isPreselectedToGuests'],
+        tagNames = json['tagNames'],
+        tagIds = json['tagIds'],
+        substituteItemId = json['substituteItemId'],
+        isSubstituteItem = json['isSubstituteItem'],
+        properties = CartProperties.fromJson(json['properties'] ?? {}),
+        amount = json['amount'],
+        image = json['image'],
+        thumbnail = json['thumbnail'],
+        options = json['options'],
+        attributes = json['attributes'],
+        conceptId = json['conceptId'],
+        count = json['count'],
+        quantity = json['quantity'],
+        selectedModifiers = (json['selectedModifiers'] as List)
+            ?.map((e) => SelectedModifiers.fromJson(e ?? {}))
+            ?.toList(),
+        splInstruction = json['splInstruction'],
+        modifierTotal = json['modifierTotal'],
+        mealPeriodId = json['mealPeriodId'],
+        uniqueId = json['uniqueId'],
+        cartItemId = json['cartItemId'];
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'contextId': contextId,
+        'tenantId': tenantId,
+        'itemId': itemId,
+        'name': name,
+        'isDeleted': isDeleted,
+        'isActive': isActive,
+        'lastUpdateTime': lastUpdateTime,
+        'revenueCategoryId': revenueCategoryId,
+        'productClassId': productClassId,
+        'kpText': kpText,
+        'kitchenDisplayText': kitchenDisplayText,
+        'receiptText': receiptText,
+        'price': price?.toJson(),
+        'defaultPriceLevelId': defaultPriceLevelId,
+        'priceLevels': priceLevels?.toJson(),
+        'isSoldByWeight': isSoldByWeight,
+        'tareWeight': tareWeight,
+        'isDiscountable': isDiscountable,
+        'allowPriceOverride': allowPriceOverride,
+        'isTaxIncluded': isTaxIncluded,
+        'taxClasses': taxClasses,
+        'kitchenVideoLabel': kitchenVideoLabel,
+        'kitchenVideoId': kitchenVideoId,
+        'kitchenVideoCategoryId': kitchenVideoCategoryId,
+        'kitchenCookTimeSeconds': kitchenCookTimeSeconds,
+        'skus': skus,
+        'itemType': itemType,
+        'displayText': displayText,
+        'itemImages': itemImages?.map((e) => e?.toJson())?.toList(),
+        'isAvailableToGuests': isAvailableToGuests,
+        'isPreselectedToGuests': isPreselectedToGuests,
+        'tagNames': tagNames,
+        'tagIds': tagIds,
+        'substituteItemId': substituteItemId,
+        'isSubstituteItem': isSubstituteItem,
+        'properties': properties?.toJson(),
+        'amount': amount,
+        'image': image,
+        'thumbnail': thumbnail,
+        'options': options,
+        'attributes': attributes,
+        'conceptId': conceptId,
+        'count': count,
+        'quantity': quantity,
+        'selectedModifiers':
+            selectedModifiers?.map((e) => e?.toJson())?.toList(),
+        'splInstruction': splInstruction,
+        'modifierTotal': modifierTotal,
+        'mealPeriodId': mealPeriodId,
+        'uniqueId': uniqueId,
+        'cartItemId': cartItemId
       };
 }

@@ -2,22 +2,6 @@ import 'base.dart';
 
 /// Json path:
 /// ```
-/// request.cartItems.priceLevels
-/// ```
-class PriceLevels {
-  // request.cartItems.priceLevels#1
-  final Num1 num1;
-
-  PriceLevels({this.num1});
-
-  PriceLevels.fromJson(Map<String, dynamic> json)
-      : num1 = Num1.fromJson(json['1'] ?? {});
-
-  Map<String, dynamic> toJson() => {'1': num1?.toJson()};
-}
-
-/// Json path:
-/// ```
 /// request.cartItems.properties
 /// ```
 class Properties {

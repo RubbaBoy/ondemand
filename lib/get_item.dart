@@ -29,27 +29,6 @@ class Request extends BaseRequest {
 
 /// Json path:
 /// ```
-/// response.childGroups.childItems.priceLevels
-/// ```
-class PriceLevels {
-  // response.childGroups.childItems.priceLevels#priceLevels
-  final List<PriceLevelsNum> priceLevels;
-
-  PriceLevels({this.priceLevels});
-
-  PriceLevels.fromJson(Map<String, dynamic> json)
-      : priceLevels = json.keys
-            .map((e) => PriceLevelsNum.fromJson(e, json[e] ?? {}))
-            .toList();
-
-  Map<String, dynamic> toJson() => {
-        'priceLevels': Map.fromIterables(priceLevels?.map((e) => e.getKey()),
-            priceLevels?.map((e) => e?.toJson()))
-      };
-}
-
-/// Json path:
-/// ```
 /// response.childGroups.childItems.properties
 /// ```
 class Properties {

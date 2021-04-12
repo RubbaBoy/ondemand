@@ -1225,27 +1225,6 @@ class OrderData {
 
 /// Json path:
 /// ```
-/// request.receiptInfo.items.priceLevels
-/// ```
-class PriceLevels {
-  // request.receiptInfo.items.priceLevels#priceLevels
-  final List<PriceLevel> priceLevels;
-
-  PriceLevels({this.priceLevels});
-
-  PriceLevels.fromJson(Map<String, dynamic> json)
-      : priceLevels = json.keys
-            .map((e) => PriceLevel.fromJson(e, json[e] ?? {}))
-            .toList();
-
-  Map<String, dynamic> toJson() => {
-        'priceLevels': Map.fromIterables(priceLevels?.map((e) => e.getKey()),
-            priceLevels?.map((e) => e?.toJson()))
-      };
-}
-
-/// Json path:
-/// ```
 /// request.receiptInfo.items.modifiers
 /// ```
 class Modifiers {
