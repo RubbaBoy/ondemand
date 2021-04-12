@@ -22,7 +22,7 @@ Future<MenuResponse> getMenu(OnDemand onDemand, _get_kitchens.Kitchen kitchen, [
       displayId: kitchen.displayProfileId);
 
   // Get the first (and most likely only) place, where more data is available
-  // about the kitchen compared to the `commons` object
+  // about the kitchen compared to the `kitchen` object
   var place = places.places.first;
 
   var menus = await onDemand.getMenus(

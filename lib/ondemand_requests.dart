@@ -9,7 +9,7 @@ import 'get_leads.dart' as _get_leads;
 import 'list_places.dart' as _list_places;
 import 'get_menus.dart' as _get_menus;
 import 'get_item.dart' as _get_item;
-import 'add_cart_adv.dart' as _add_cart_adv;
+import 'add_cart_new.dart' as _add_cart_new;
 import 'add_cart.dart' as _add_cart;
 import 'account_inquiry.dart' as _account_inquiry;
 import 'get_revenue_category.dart' as _get_revenue_category;
@@ -151,7 +151,7 @@ class OnDemand {
     return _get_item.Response.fromJson(res.json(), res.headers);
   }
 
-  Future<_add_cart_adv.Response> addCartAdv(_add_cart_adv.Request request,
+  Future<_add_cart_new.Response> addCartNew(_add_cart_new.Request request,
       {String contextId}) async {
     var res = await post(
         'https://ondemand.rit.edu/api/order/$siteNumber/$contextId/orders',
@@ -161,7 +161,7 @@ class OnDemand {
       return Future.error('Status ${res.statusCode}: ${res.body}');
     }
 
-    return _add_cart_adv.Response.fromJson(res.json(), res.headers);
+    return _add_cart_new.Response.fromJson(res.json(), res.headers);
   }
 
   Future<_add_cart.Response> addCart(_add_cart.Request request,
