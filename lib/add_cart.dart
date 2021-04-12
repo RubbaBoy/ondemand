@@ -2,32 +2,6 @@ import 'base.dart';
 
 /// Json path:
 /// ```
-/// response.addedItem.priceLevels[]
-/// ```
-class PriceLevelsNum {
-  // response.addedItem.priceLevels[]#key
-  final String key;
-  // response.addedItem.priceLevels[]#priceLevelId
-  final String priceLevelId;
-  // response.addedItem.priceLevels[]#name
-  final String name;
-  // response.addedItem.priceLevels[]#price
-  final Price price;
-
-  PriceLevelsNum({this.key, this.priceLevelId, this.name, this.price});
-  String getKey() => key;
-
-  PriceLevelsNum.fromJson(this.key, Map<String, dynamic> json)
-      : priceLevelId = json['priceLevelId'],
-        name = json['name'],
-        price = Price.fromJson(json['price'] ?? {});
-
-  Map<String, dynamic> toJson() =>
-      {'priceLevelId': priceLevelId, 'name': name, 'price': price?.toJson()};
-}
-
-/// Json path:
-/// ```
 /// response.addedItem.priceLevels
 /// ```
 class PriceLevels {
@@ -45,60 +19,6 @@ class PriceLevels {
         'priceLevels': Map.fromIterables(priceLevels?.map((e) => e.getKey()),
             priceLevels?.map((e) => e?.toJson()))
       };
-}
-
-/// Json path:
-/// ```
-/// response.addedItem.itemImages
-/// ```
-class ItemImages {
-  // response.addedItem.itemImages#businessContextId
-  final String businessContextId;
-  // response.addedItem.itemImages#imageId
-  final String imageId;
-  // response.addedItem.itemImages#name
-  final String name;
-  // response.addedItem.itemImages#fileNames
-  final List<String> fileNames;
-  // response.addedItem.itemImages#tags
-  final List<String> tags;
-
-  ItemImages(
-      {this.businessContextId,
-      this.imageId,
-      this.name,
-      this.fileNames,
-      this.tags});
-
-  ItemImages.fromJson(Map<String, dynamic> json)
-      : businessContextId = json['businessContextId'],
-        imageId = json['imageId'],
-        name = json['name'],
-        fileNames = json['fileNames']?.cast<String>(),
-        tags = json['tags']?.cast<String>();
-
-  Map<String, dynamic> toJson() => {
-        'businessContextId': businessContextId,
-        'imageId': imageId,
-        'name': name,
-        'fileNames': fileNames,
-        'tags': tags
-      };
-}
-
-/// Json path:
-/// ```
-/// request.item.properties
-/// ```
-class Properties {
-  // request.item.properties#cartGuid
-  final String cartGuid;
-
-  Properties({this.cartGuid});
-
-  Properties.fromJson(Map<String, dynamic> json) : cartGuid = json['cartGuid'];
-
-  Map<String, dynamic> toJson() => {'cartGuid': cartGuid};
 }
 
 /// Json path:
@@ -179,7 +99,7 @@ class Item {
   // request.item#isSubstituteItem
   final bool isSubstituteItem;
   // request.item#properties
-  final Properties properties;
+  final CartProperties properties;
   // request.item#amount
   final String amount;
   // request.item#image
@@ -295,7 +215,7 @@ class Item {
         tagIds = json['tagIds'],
         substituteItemId = json['substituteItemId'],
         isSubstituteItem = json['isSubstituteItem'],
-        properties = Properties.fromJson(json['properties'] ?? {}),
+        properties = CartProperties.fromJson(json['properties'] ?? {}),
         amount = json['amount'],
         image = json['image'],
         thumbnail = json['thumbnail'],
@@ -364,33 +284,25 @@ class Item {
 
 /// Json path:
 /// ```
-/// request.schedule.displayProfileState
+/// request.schedule.properties
 /// ```
-class DisplayProfileState {
-  // request.schedule.displayProfileState#displayProfileId
-  final String displayProfileId;
-  // request.schedule.displayProfileState#conceptStates
-  final List<ConceptStates> conceptStates;
+class Properties {
+  // request.schedule.properties#TRANSITION_MESSAGE
+  final String transitionMessage;
 
-  DisplayProfileState({this.displayProfileId, this.conceptStates});
+  Properties({this.transitionMessage});
 
-  DisplayProfileState.fromJson(Map<String, dynamic> json)
-      : displayProfileId = json['displayProfileId'],
-        conceptStates = (json['conceptStates'] as List)
-            ?.map((e) => ConceptStates.fromJson(e ?? {}))
-            ?.toList();
+  Properties.fromJson(Map<String, dynamic> json)
+      : transitionMessage = json['TRANSITION_MESSAGE'];
 
-  Map<String, dynamic> toJson() => {
-        'displayProfileId': displayProfileId,
-        'conceptStates': conceptStates?.map((e) => e?.toJson())?.toList()
-      };
+  Map<String, dynamic> toJson() => {'TRANSITION_MESSAGE': transitionMessage};
 }
 
 /// Json path:
 /// ```
 /// request.schedule
 /// ```
-class Schedule {
+class CartSchedule {
   // request.schedule#@c
   final String c;
   // request.schedule#scheduledExpression
@@ -400,13 +312,13 @@ class Schedule {
   // request.schedule#displayProfileState
   final DisplayProfileState displayProfileState;
 
-  Schedule(
+  CartSchedule(
       {this.c,
       this.scheduledExpression,
       this.properties,
       this.displayProfileState});
 
-  Schedule.fromJson(Map<String, dynamic> json)
+  CartSchedule.fromJson(Map<String, dynamic> json)
       : c = json['@c'],
         scheduledExpression = json['scheduledExpression'],
         properties = Properties.fromJson(json['properties'] ?? {}),
@@ -433,7 +345,7 @@ class Request extends BaseRequest {
   // request#currencyDetails
   final CurrencyDetails currencyDetails;
   // request#schedule
-  final List<Schedule> schedule;
+  final List<CartSchedule> schedule;
   // request#scheduleTime
   final ScheduleTime scheduleTime;
   // request#storePriceLevel
@@ -456,7 +368,7 @@ class Request extends BaseRequest {
         currencyDetails =
             CurrencyDetails.fromJson(json['currencyDetails'] ?? {}),
         schedule = (json['schedule'] as List)
-            ?.map((e) => Schedule.fromJson(e ?? {}))
+            ?.map((e) => CartSchedule.fromJson(e ?? {}))
             ?.toList(),
         scheduleTime = ScheduleTime.fromJson(json['scheduleTime'] ?? {}),
         storePriceLevel = json['storePriceLevel'],
@@ -564,279 +476,17 @@ class LineItems {
 
 /// Json path:
 /// ```
-/// response.orderDetails.gratuityAmount
+/// response.orderDetails.taxBreakdown.salesTaxes.amount
 /// ```
-class GratuityAmount {
-  // response.orderDetails.gratuityAmount#currencyUnit
+class Amount {
+  // response.orderDetails.taxBreakdown.salesTaxes.amount#currencyUnit
   final String currencyUnit;
-  // response.orderDetails.gratuityAmount#amount
+  // response.orderDetails.taxBreakdown.salesTaxes.amount#amount
   final String amount;
 
-  GratuityAmount({this.currencyUnit, this.amount});
+  Amount({this.currencyUnit, this.amount});
 
-  GratuityAmount.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
-/// response.orderDetails.serviceAmount
-/// ```
-class ServiceAmount {
-  // response.orderDetails.serviceAmount#currencyUnit
-  final String currencyUnit;
-  // response.orderDetails.serviceAmount#amount
-  final String amount;
-
-  ServiceAmount({this.currencyUnit, this.amount});
-
-  ServiceAmount.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
-/// response.orderDetails.taxExcludedTotalAmount
-/// ```
-class TaxExcludedTotalAmount {
-  // response.orderDetails.taxExcludedTotalAmount#currencyUnit
-  final String currencyUnit;
-  // response.orderDetails.taxExcludedTotalAmount#amount
-  final String amount;
-
-  TaxExcludedTotalAmount({this.currencyUnit, this.amount});
-
-  TaxExcludedTotalAmount.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
-/// response.orderDetails.taxExcludedServiceChargeAndGratuityIncludedTotalAmount
-/// ```
-class TaxExcludedServiceChargeAndGratuityIncludedTotalAmount {
-  // response.orderDetails.taxExcludedServiceChargeAndGratuityIncludedTotalAmount#currencyUnit
-  final String currencyUnit;
-  // response.orderDetails.taxExcludedServiceChargeAndGratuityIncludedTotalAmount#amount
-  final String amount;
-
-  TaxExcludedServiceChargeAndGratuityIncludedTotalAmount(
-      {this.currencyUnit, this.amount});
-
-  TaxExcludedServiceChargeAndGratuityIncludedTotalAmount.fromJson(
-      Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
-/// response.orderDetails.taxTotalAmount
-/// ```
-class TaxTotalAmount {
-  // response.orderDetails.taxTotalAmount#currencyUnit
-  final String currencyUnit;
-  // response.orderDetails.taxTotalAmount#amount
-  final String amount;
-
-  TaxTotalAmount({this.currencyUnit, this.amount});
-
-  TaxTotalAmount.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
-/// response.orderDetails.taxIncludedTotalAmount
-/// ```
-class TaxIncludedTotalAmount {
-  // response.orderDetails.taxIncludedTotalAmount#currencyUnit
-  final String currencyUnit;
-  // response.orderDetails.taxIncludedTotalAmount#amount
-  final String amount;
-
-  TaxIncludedTotalAmount({this.currencyUnit, this.amount});
-
-  TaxIncludedTotalAmount.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
-/// response.orderDetails.subTotalAmount
-/// ```
-class SubTotalAmount {
-  // response.orderDetails.subTotalAmount#currencyUnit
-  final String currencyUnit;
-  // response.orderDetails.subTotalAmount#amount
-  final String amount;
-
-  SubTotalAmount({this.currencyUnit, this.amount});
-
-  SubTotalAmount.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
-/// response.orderDetails.subTotalAmountWithoutDiscount
-/// ```
-class SubTotalAmountWithoutDiscount {
-  // response.orderDetails.subTotalAmountWithoutDiscount#currencyUnit
-  final String currencyUnit;
-  // response.orderDetails.subTotalAmountWithoutDiscount#amount
-  final String amount;
-
-  SubTotalAmountWithoutDiscount({this.currencyUnit, this.amount});
-
-  SubTotalAmountWithoutDiscount.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
-/// response.orderDetails.subTotalTaxAmount
-/// ```
-class SubTotalTaxAmount {
-  // response.orderDetails.subTotalTaxAmount#currencyUnit
-  final String currencyUnit;
-  // response.orderDetails.subTotalTaxAmount#amount
-  final String amount;
-
-  SubTotalTaxAmount({this.currencyUnit, this.amount});
-
-  SubTotalTaxAmount.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
-/// response.orderDetails.totalPaymentAmount
-/// ```
-class TotalPaymentAmount {
-  // response.orderDetails.totalPaymentAmount#currencyUnit
-  final String currencyUnit;
-  // response.orderDetails.totalPaymentAmount#amount
-  final String amount;
-
-  TotalPaymentAmount({this.currencyUnit, this.amount});
-
-  TotalPaymentAmount.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
-/// response.orderDetails.totalTipAmount
-/// ```
-class TotalTipAmount {
-  // response.orderDetails.totalTipAmount#currencyUnit
-  final String currencyUnit;
-  // response.orderDetails.totalTipAmount#amount
-  final String amount;
-
-  TotalTipAmount({this.currencyUnit, this.amount});
-
-  TotalTipAmount.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
-/// response.orderDetails.totalDueAmount
-/// ```
-class TotalDueAmount {
-  // response.orderDetails.totalDueAmount#currencyUnit
-  final String currencyUnit;
-  // response.orderDetails.totalDueAmount#amount
-  final String amount;
-
-  TotalDueAmount({this.currencyUnit, this.amount});
-
-  TotalDueAmount.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
-/// response.orderDetails.totalDiscountAmount
-/// ```
-class TotalDiscountAmount {
-  // response.orderDetails.totalDiscountAmount#currencyUnit
-  final String currencyUnit;
-  // response.orderDetails.totalDiscountAmount#amount
-  final String amount;
-
-  TotalDiscountAmount({this.currencyUnit, this.amount});
-
-  TotalDiscountAmount.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
-}
-
-/// Json path:
-/// ```
-/// response.orderDetails.totalRoundAmount
-/// ```
-class TotalRoundAmount {
-  // response.orderDetails.totalRoundAmount#currencyUnit
-  final String currencyUnit;
-  // response.orderDetails.totalRoundAmount#amount
-  final String amount;
-
-  TotalRoundAmount({this.currencyUnit, this.amount});
-
-  TotalRoundAmount.fromJson(Map<String, dynamic> json)
+  Amount.fromJson(Map<String, dynamic> json)
       : currencyUnit = json['currencyUnit'],
         amount = json['amount'];
 

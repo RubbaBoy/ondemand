@@ -27,13 +27,9 @@ Future<MenuResponse> getMenu(OnDemand onDemand, _get_kitchens.Kitchen kitchen, [
 
   var menus = await onDemand.getMenus(
       _get_menus.Request(
-          menus: place.menus
-              .map((e) => _get_menus.Menu.fromJson(e.toJson()))
-              .toList(),
+          menus: place.menus,
           scheduleTime: scheduledTime,
-          schedule: place.schedule
-              .map((e) => _get_menus.Schedule.fromJson(e.toJson()))
-              .toList(),
+          schedule: place.schedule,
           scheduledDay: 0,
           storePriceLevel: PRICE_LEVEL,
           currencyUnit: CURRENCY),
@@ -50,7 +46,7 @@ class MenuResponse {
   final _list_places.Place place;
 
   /// The main menu being used by the place
-  final _get_menus.Menu menu;
+  final Menu menu;
 
   MenuResponse(this.place, this.menu);
 }

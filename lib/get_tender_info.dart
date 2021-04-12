@@ -25,6 +25,25 @@ class Request extends BaseRequest {
       {'contextId': contextId, 'tenderList': tenderList};
 }
 
+/// Json path:
+/// ```
+/// response[]
+/// ```
+class TenderInfo {
+  // response[]#key
+  final String key;
+  // response[]#verificationCodeId
+  final int verificationCodeId;
+
+  TenderInfo({this.key, this.verificationCodeId});
+  String getKey() => key;
+
+  TenderInfo.fromJson(this.key, Map<String, dynamic> json)
+      : verificationCodeId = json['verificationCodeId'];
+
+  Map<String, dynamic> toJson() => {'verificationCodeId': verificationCodeId};
+}
+
 /// Url: https://ondemand.rit.edu/api/order/getPaymentTenderInfo
 /// Method: POST
 /// Json path:

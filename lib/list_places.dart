@@ -133,183 +133,6 @@ class ConceptOptions {
 
 /// Json path:
 /// ```
-/// response.response.menus.categories.categoryOptions
-/// ```
-class CategoryOptions {
-  CategoryOptions.fromJson(Map<String, dynamic> json);
-
-  Map<String, dynamic> toJson() => {};
-}
-
-/// Json path:
-/// ```
-/// response.response.menus.categories.itemIdToItemPropertiesMap
-/// ```
-class ItemIdToItemPropertiesMap {
-  ItemIdToItemPropertiesMap.fromJson(Map<String, dynamic> json);
-
-  Map<String, dynamic> toJson() => {};
-}
-
-/// Json path:
-/// ```
-/// response.response.menus.categories
-/// ```
-class Categories {
-  // response.response.menus.categories#name
-  final String name;
-  // response.response.menus.categories#categoryOptions
-  final CategoryOptions categoryOptions;
-  // response.response.menus.categories#items
-  final List<String> items;
-  // response.response.menus.categories#itemIdToItemPropertiesMap
-  final ItemIdToItemPropertiesMap itemIdToItemPropertiesMap;
-  // response.response.menus.categories#kioskImages
-  final List<dynamic> kioskImages;
-
-  Categories(
-      {this.name,
-      this.categoryOptions,
-      this.items,
-      this.itemIdToItemPropertiesMap,
-      this.kioskImages});
-
-  Categories.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
-        categoryOptions =
-            CategoryOptions.fromJson(json['categoryOptions'] ?? {}),
-        items = json['items']?.cast<String>(),
-        itemIdToItemPropertiesMap = ItemIdToItemPropertiesMap.fromJson(
-            json['itemIdToItemPropertiesMap'] ?? {}),
-        kioskImages = json['kioskImages'];
-
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'categoryOptions': categoryOptions?.toJson(),
-        'items': items,
-        'itemIdToItemPropertiesMap': itemIdToItemPropertiesMap?.toJson(),
-        'kioskImages': kioskImages
-      };
-}
-
-/// Json path:
-/// ```
-/// response.response.menus
-/// ```
-class Menus {
-  // response.response.menus#name
-  final String name;
-  // response.response.menus#description
-  final String description;
-  // response.response.menus#id
-  final String id;
-  // response.response.menus#categories
-  final List<Categories> categories;
-  // response.response.menus#lastUpdateTime
-  final String lastUpdateTime;
-
-  Menus(
-      {this.name,
-      this.description,
-      this.id,
-      this.categories,
-      this.lastUpdateTime});
-
-  Menus.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
-        description = json['description'],
-        id = json['id'],
-        categories = (json['categories'] as List)
-            ?.map((e) => Categories.fromJson(e ?? {}))
-            ?.toList(),
-        lastUpdateTime = json['lastUpdateTime'];
-
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'description': description,
-        'id': id,
-        'categories': categories?.map((e) => e?.toJson())?.toList(),
-        'lastUpdateTime': lastUpdateTime
-      };
-}
-
-/// Json path:
-/// ```
-/// response.response.schedule.properties
-/// ```
-class Properties {
-  // response.response.schedule.properties#TRANSITION_MESSAGE
-  final String transitionMessage;
-
-  Properties({this.transitionMessage});
-
-  Properties.fromJson(Map<String, dynamic> json)
-      : transitionMessage = json['TRANSITION_MESSAGE'];
-
-  Map<String, dynamic> toJson() => {'TRANSITION_MESSAGE': transitionMessage};
-}
-
-/// Json path:
-/// ```
-/// response.response.schedule.displayProfileState
-/// ```
-class DisplayProfileState {
-  // response.response.schedule.displayProfileState#displayProfileId
-  final String displayProfileId;
-  // response.response.schedule.displayProfileState#conceptStates
-  final List<ConceptStates> conceptStates;
-
-  DisplayProfileState({this.displayProfileId, this.conceptStates});
-
-  DisplayProfileState.fromJson(Map<String, dynamic> json)
-      : displayProfileId = json['displayProfileId'],
-        conceptStates = (json['conceptStates'] as List)
-            ?.map((e) => ConceptStates.fromJson(e ?? {}))
-            ?.toList();
-
-  Map<String, dynamic> toJson() => {
-        'displayProfileId': displayProfileId,
-        'conceptStates': conceptStates?.map((e) => e?.toJson())?.toList()
-      };
-}
-
-/// Json path:
-/// ```
-/// response.response.schedule
-/// ```
-class Schedule {
-  // response.response.schedule#@c
-  final String c;
-  // response.response.schedule#scheduledExpression
-  final String scheduledExpression;
-  // response.response.schedule#properties
-  final Properties properties;
-  // response.response.schedule#displayProfileState
-  final DisplayProfileState displayProfileState;
-
-  Schedule(
-      {this.c,
-      this.scheduledExpression,
-      this.properties,
-      this.displayProfileState});
-
-  Schedule.fromJson(Map<String, dynamic> json)
-      : c = json['@c'],
-        scheduledExpression = json['scheduledExpression'],
-        properties = Properties.fromJson(json['properties'] ?? {}),
-        displayProfileState =
-            DisplayProfileState.fromJson(json['displayProfileState'] ?? {});
-
-  Map<String, dynamic> toJson() => {
-        '@c': c,
-        'scheduledExpression': scheduledExpression,
-        'properties': properties?.toJson(),
-        'displayProfileState': displayProfileState?.toJson()
-      };
-}
-
-/// Json path:
-/// ```
 /// response.response.availableAt
 /// ```
 class AvailableAt {
@@ -344,9 +167,9 @@ class Place {
   // response.response#conceptOptions
   final ConceptOptions conceptOptions;
   // response.response#menus
-  final List<Menus> menus;
+  final List<Menu> menus;
   // response.response#schedule
-  final List<Schedule> schedule;
+  final List<MenuSchedule> schedule;
   // response.response#availableNow
   final bool availableNow;
   // response.response#availableAt
@@ -368,10 +191,10 @@ class Place {
         name = json['name'],
         conceptOptions = ConceptOptions.fromJson(json['conceptOptions'] ?? {}),
         menus = (json['menus'] as List)
-            ?.map((e) => Menus.fromJson(e ?? {}))
+            ?.map((e) => Menu.fromJson(e ?? {}))
             ?.toList(),
         schedule = (json['schedule'] as List)
-            ?.map((e) => Schedule.fromJson(e ?? {}))
+            ?.map((e) => MenuSchedule.fromJson(e ?? {}))
             ?.toList(),
         availableNow = json['availableNow'],
         availableAt = AvailableAt.fromJson(json['availableAt'] ?? {});

@@ -82,6 +82,36 @@ class Request extends BaseRequest {
 
 /// Json path:
 /// ```
+/// response.response.amount
+/// ```
+class Amount {
+  // response.response.amount#remaining
+  final String remaining;
+  // response.response.amount#currency
+  final String currency;
+  // response.response.amount#applied
+  final String applied;
+  // response.response.amount#total
+  final String total;
+
+  Amount({this.remaining, this.currency, this.applied, this.total});
+
+  Amount.fromJson(Map<String, dynamic> json)
+      : remaining = json['remaining'],
+        currency = json['currency'],
+        applied = json['applied'],
+        total = json['total'];
+
+  Map<String, dynamic> toJson() => {
+        'remaining': remaining,
+        'currency': currency,
+        'applied': applied,
+        'total': total
+      };
+}
+
+/// Json path:
+/// ```
 /// response.response
 /// ```
 class InquiryResponse {

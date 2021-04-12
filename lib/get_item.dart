@@ -29,32 +29,6 @@ class Request extends BaseRequest {
 
 /// Json path:
 /// ```
-/// response.priceLevels[]
-/// ```
-class PriceLevel {
-  // response.priceLevels[]#key
-  final String key;
-  // response.priceLevels[]#priceLevelId
-  final String priceLevelId;
-  // response.priceLevels[]#name
-  final String name;
-  // response.priceLevels[]#price
-  final Price price;
-
-  PriceLevel({this.key, this.priceLevelId, this.name, this.price});
-  String getKey() => key;
-
-  PriceLevel.fromJson(this.key, Map<String, dynamic> json)
-      : priceLevelId = json['priceLevelId'],
-        name = json['name'],
-        price = Price.fromJson(json['price'] ?? {});
-
-  Map<String, dynamic> toJson() =>
-      {'priceLevelId': priceLevelId, 'name': name, 'price': price?.toJson()};
-}
-
-/// Json path:
-/// ```
 /// response.childGroups.childItems.priceLevels
 /// ```
 class PriceLevels {
@@ -72,32 +46,6 @@ class PriceLevels {
         'priceLevels': Map.fromIterables(priceLevels?.map((e) => e.getKey()),
             priceLevels?.map((e) => e?.toJson()))
       };
-}
-
-/// Json path:
-/// ```
-/// response.childGroups.childItems.priceLevels[]
-/// ```
-class PriceLevelsNum {
-  // response.childGroups.childItems.priceLevels[]#key
-  final String key;
-  // response.childGroups.childItems.priceLevels[]#priceLevelId
-  final String priceLevelId;
-  // response.childGroups.childItems.priceLevels[]#name
-  final String name;
-  // response.childGroups.childItems.priceLevels[]#price
-  final Price price;
-
-  PriceLevelsNum({this.key, this.priceLevelId, this.name, this.price});
-  String getKey() => key;
-
-  PriceLevelsNum.fromJson(this.key, Map<String, dynamic> json)
-      : priceLevelId = json['priceLevelId'],
-        name = json['name'],
-        price = Price.fromJson(json['price'] ?? {});
-
-  Map<String, dynamic> toJson() =>
-      {'priceLevelId': priceLevelId, 'name': name, 'price': price?.toJson()};
 }
 
 /// Json path:
@@ -382,45 +330,6 @@ class ChildGroup {
         'childItems': childItems?.map((e) => e?.toJson())?.toList(),
         'isAvailableToGuests': isAvailableToGuests,
         'isPreselectedToGuests': isPreselectedToGuests
-      };
-}
-
-/// Json path:
-/// ```
-/// response.itemImages
-/// ```
-class ItemImage {
-  // response.itemImages#businessContextId
-  final String businessContextId;
-  // response.itemImages#imageId
-  final String imageId;
-  // response.itemImages#name
-  final String name;
-  // response.itemImages#fileNames
-  final List<String> fileNames;
-  // response.itemImages#tags
-  final List<String> tags;
-
-  ItemImage(
-      {this.businessContextId,
-      this.imageId,
-      this.name,
-      this.fileNames,
-      this.tags});
-
-  ItemImage.fromJson(Map<String, dynamic> json)
-      : businessContextId = json['businessContextId'],
-        imageId = json['imageId'],
-        name = json['name'],
-        fileNames = json['fileNames']?.cast<String>(),
-        tags = json['tags']?.cast<String>();
-
-  Map<String, dynamic> toJson() => {
-        'businessContextId': businessContextId,
-        'imageId': imageId,
-        'name': name,
-        'fileNames': fileNames,
-        'tags': tags
       };
 }
 

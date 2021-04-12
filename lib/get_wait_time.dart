@@ -2,29 +2,6 @@ import 'base.dart';
 
 /// Json path:
 /// ```
-/// request.cartItems.priceLevels.1
-/// ```
-class Num1 {
-  // request.cartItems.priceLevels.1#priceLevelId
-  final String priceLevelId;
-  // request.cartItems.priceLevels.1#name
-  final String name;
-  // request.cartItems.priceLevels.1#price
-  final Price price;
-
-  Num1({this.priceLevelId, this.name, this.price});
-
-  Num1.fromJson(Map<String, dynamic> json)
-      : priceLevelId = json['priceLevelId'],
-        name = json['name'],
-        price = Price.fromJson(json['price'] ?? {});
-
-  Map<String, dynamic> toJson() =>
-      {'priceLevelId': priceLevelId, 'name': name, 'price': price?.toJson()};
-}
-
-/// Json path:
-/// ```
 /// request.cartItems.priceLevels
 /// ```
 class PriceLevels {
@@ -37,45 +14,6 @@ class PriceLevels {
       : num1 = Num1.fromJson(json['1'] ?? {});
 
   Map<String, dynamic> toJson() => {'1': num1?.toJson()};
-}
-
-/// Json path:
-/// ```
-/// request.cartItems.itemImages
-/// ```
-class ItemImages {
-  // request.cartItems.itemImages#businessContextId
-  final String businessContextId;
-  // request.cartItems.itemImages#imageId
-  final String imageId;
-  // request.cartItems.itemImages#name
-  final String name;
-  // request.cartItems.itemImages#fileNames
-  final List<String> fileNames;
-  // request.cartItems.itemImages#tags
-  final List<String> tags;
-
-  ItemImages(
-      {this.businessContextId,
-      this.imageId,
-      this.name,
-      this.fileNames,
-      this.tags});
-
-  ItemImages.fromJson(Map<String, dynamic> json)
-      : businessContextId = json['businessContextId'],
-        imageId = json['imageId'],
-        name = json['name'],
-        fileNames = json['fileNames']?.cast<String>(),
-        tags = json['tags']?.cast<String>();
-
-  Map<String, dynamic> toJson() => {
-        'businessContextId': businessContextId,
-        'imageId': imageId,
-        'name': name,
-        'fileNames': fileNames,
-        'tags': tags
-      };
 }
 
 /// Json path:
@@ -475,6 +413,21 @@ class Request extends BaseRequest {
         'kitchenContextId': kitchenContextId,
         'deliveryType': deliveryType
       };
+}
+
+/// Json path:
+/// ```
+/// response.maxTime.periodType
+/// ```
+class PeriodType {
+  // response.maxTime.periodType#name
+  final String name;
+
+  PeriodType({this.name});
+
+  PeriodType.fromJson(Map<String, dynamic> json) : name = json['name'];
+
+  Map<String, dynamic> toJson() => {'name': name};
 }
 
 /// Json path:

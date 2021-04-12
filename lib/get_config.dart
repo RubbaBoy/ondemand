@@ -17,22 +17,6 @@ class Request extends BaseRequest {
 
 /// Json path:
 /// ```
-/// response.storeList.storeInfo.logoDetails
-/// ```
-class LogoDetails {
-  // response.storeList.storeInfo.logoDetails#RECEIPT_HEADER
-  final ReceiptHeader receiptHeader;
-
-  LogoDetails({this.receiptHeader});
-
-  LogoDetails.fromJson(Map<String, dynamic> json)
-      : receiptHeader = ReceiptHeader.fromJson(json['RECEIPT_HEADER'] ?? {});
-
-  Map<String, dynamic> toJson() => {'RECEIPT_HEADER': receiptHeader?.toJson()};
-}
-
-/// Json path:
-/// ```
 /// response.storeList.storeInfo.properties
 /// ```
 class Properties {

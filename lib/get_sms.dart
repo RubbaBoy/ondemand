@@ -2,40 +2,6 @@ import 'base.dart';
 
 /// Json path:
 /// ```
-/// request.orderData.currencyInfo
-/// ```
-class CurrencyInfo {
-  // request.orderData.currencyInfo#currencyCultureName
-  final String currencyCultureName;
-  // request.orderData.currencyInfo#currencyCode
-  final String currencyCode;
-  // request.orderData.currencyInfo#currencyDecimalDigits
-  final String currencyDecimalDigits;
-  // request.orderData.currencyInfo#currencySymbol
-  final String currencySymbol;
-
-  CurrencyInfo(
-      {this.currencyCultureName,
-      this.currencyCode,
-      this.currencyDecimalDigits,
-      this.currencySymbol});
-
-  CurrencyInfo.fromJson(Map<String, dynamic> json)
-      : currencyCultureName = json['currencyCultureName'],
-        currencyCode = json['currencyCode'],
-        currencyDecimalDigits = json['currencyDecimalDigits'],
-        currencySymbol = json['currencySymbol'];
-
-  Map<String, dynamic> toJson() => {
-        'currencyCultureName': currencyCultureName,
-        'currencyCode': currencyCode,
-        'currencyDecimalDigits': currencyDecimalDigits,
-        'currencySymbol': currencySymbol
-      };
-}
-
-/// Json path:
-/// ```
 /// request.orderData.lineItems
 /// ```
 class LineItems {
@@ -94,22 +60,6 @@ class SmsReceiptOption {
 
   Map<String, dynamic> toJson() =>
       {'smsHeader': smsHeader, 'smsBody': smsBody, 'smsFooter': smsFooter};
-}
-
-/// Json path:
-/// ```
-/// request.orderData.storeInfo.logoDetails
-/// ```
-class LogoDetails {
-  // request.orderData.storeInfo.logoDetails#RECEIPT_HEADER
-  final ReceiptHeader receiptHeader;
-
-  LogoDetails({this.receiptHeader});
-
-  LogoDetails.fromJson(Map<String, dynamic> json)
-      : receiptHeader = ReceiptHeader.fromJson(json['RECEIPT_HEADER'] ?? {});
-
-  Map<String, dynamic> toJson() => {'RECEIPT_HEADER': receiptHeader?.toJson()};
 }
 
 /// Json path:

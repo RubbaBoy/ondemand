@@ -190,6 +190,25 @@ class DisplayOptions {
 
 /// Json path:
 /// ```
+/// response.response.allAvailableList.availableAt.openWindowTimeFrames
+/// ```
+class OpenWindowTimeFrames {
+  // response.response.allAvailableList.availableAt.openWindowTimeFrames#opens
+  final String opens;
+  // response.response.allAvailableList.availableAt.openWindowTimeFrames#closes
+  final String closes;
+
+  OpenWindowTimeFrames({this.opens, this.closes});
+
+  OpenWindowTimeFrames.fromJson(Map<String, dynamic> json)
+      : opens = json['opens'],
+        closes = json['closes'];
+
+  Map<String, dynamic> toJson() => {'opens': opens, 'closes': closes};
+}
+
+/// Json path:
+/// ```
 /// response.response.allAvailableList.availableAt
 /// ```
 class AvailableAt {
@@ -256,6 +275,26 @@ class AllAvailableList {
 
   Map<String, dynamic> toJson() =>
       {'day': day, 'index': index, 'availableAt': availableAt?.toJson()};
+}
+
+/// Json path:
+/// ```
+/// response.response.atriumConfig.autoDeduct
+/// ```
+class AutoDeduct {
+  // response.response.atriumConfig.autoDeduct#displayName
+  final String displayName;
+  // response.response.atriumConfig.autoDeduct#isEnabled
+  final bool isEnabled;
+
+  AutoDeduct({this.displayName, this.isEnabled});
+
+  AutoDeduct.fromJson(Map<String, dynamic> json)
+      : displayName = json['displayName'],
+        isEnabled = json['isEnabled'];
+
+  Map<String, dynamic> toJson() =>
+      {'displayName': displayName, 'isEnabled': isEnabled};
 }
 
 /// Json path:
@@ -1195,22 +1234,6 @@ class GaDiscounts {
   GaDiscounts.fromJson(Map<String, dynamic> json);
 
   Map<String, dynamic> toJson() => {};
-}
-
-/// Json path:
-/// ```
-/// response.response.storeInfo.logoDetails
-/// ```
-class LogoDetails {
-  // response.response.storeInfo.logoDetails#RECEIPT_HEADER
-  final ReceiptHeader receiptHeader;
-
-  LogoDetails({this.receiptHeader});
-
-  LogoDetails.fromJson(Map<String, dynamic> json)
-      : receiptHeader = ReceiptHeader.fromJson(json['RECEIPT_HEADER'] ?? {});
-
-  Map<String, dynamic> toJson() => {'RECEIPT_HEADER': receiptHeader?.toJson()};
 }
 
 /// Json path:

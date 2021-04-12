@@ -2,6 +2,36 @@ import 'base.dart';
 
 /// Json path:
 /// ```
+/// request.atriumAccount.amount
+/// ```
+class Amount {
+  // request.atriumAccount.amount#remaining
+  final String remaining;
+  // request.atriumAccount.amount#currency
+  final String currency;
+  // request.atriumAccount.amount#applied
+  final String applied;
+  // request.atriumAccount.amount#total
+  final String total;
+
+  Amount({this.remaining, this.currency, this.applied, this.total});
+
+  Amount.fromJson(Map<String, dynamic> json)
+      : remaining = json['remaining'],
+        currency = json['currency'],
+        applied = json['applied'],
+        total = json['total'];
+
+  Map<String, dynamic> toJson() => {
+        'remaining': remaining,
+        'currency': currency,
+        'applied': applied,
+        'total': total
+      };
+}
+
+/// Json path:
+/// ```
 /// request.atriumAccount
 /// ```
 class AtriumAccount {
@@ -470,26 +500,6 @@ class AtriumPaymentResponse {
         'accounts': accounts?.map((e) => e?.toJson())?.toList(),
         'type': type
       };
-}
-
-/// Json path:
-/// ```
-/// response.data.paymentData.paymentResponse.paymentSupport.tipAmount
-/// ```
-class TipAmount {
-  // response.data.paymentData.paymentResponse.paymentSupport.tipAmount#currencyUnit
-  final String currencyUnit;
-  // response.data.paymentData.paymentResponse.paymentSupport.tipAmount#amount
-  final String amount;
-
-  TipAmount({this.currencyUnit, this.amount});
-
-  TipAmount.fromJson(Map<String, dynamic> json)
-      : currencyUnit = json['currencyUnit'],
-        amount = json['amount'];
-
-  Map<String, dynamic> toJson() =>
-      {'currencyUnit': currencyUnit, 'amount': amount};
 }
 
 /// Json path:
