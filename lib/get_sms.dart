@@ -2,6 +2,40 @@ import 'base.dart';
 
 /// Json path:
 /// ```
+/// request.orderData.currencyInfo
+/// ```
+class CurrencyInfo {
+  // request.orderData.currencyInfo#currencyCultureName
+  final String currencyCultureName;
+  // request.orderData.currencyInfo#currencyCode
+  final String currencyCode;
+  // request.orderData.currencyInfo#currencyDecimalDigits
+  final String currencyDecimalDigits;
+  // request.orderData.currencyInfo#currencySymbol
+  final String currencySymbol;
+
+  CurrencyInfo(
+      {this.currencyCultureName,
+      this.currencyCode,
+      this.currencyDecimalDigits,
+      this.currencySymbol});
+
+  CurrencyInfo.fromJson(Map<String, dynamic> json)
+      : currencyCultureName = json['currencyCultureName'],
+        currencyCode = json['currencyCode'],
+        currencyDecimalDigits = json['currencyDecimalDigits'],
+        currencySymbol = json['currencySymbol'];
+
+  Map<String, dynamic> toJson() => {
+        'currencyCultureName': currencyCultureName,
+        'currencyCode': currencyCode,
+        'currencyDecimalDigits': currencyDecimalDigits,
+        'currencySymbol': currencySymbol
+      };
+}
+
+/// Json path:
+/// ```
 /// request.orderData.lineItems
 /// ```
 class LineItems {
@@ -36,6 +70,45 @@ class LineItems {
         'displayText': displayText,
         'splInstruction': splInstruction,
         'lineItemGroups': lineItemGroups
+      };
+}
+
+/// Json path:
+/// ```
+/// request.orderData.paymentInfo
+/// ```
+class PaymentInfo {
+  // request.orderData.paymentInfo#buyPaymentForm
+  final String buyPaymentForm;
+  // request.orderData.paymentInfo#showAuthorizationInfoOnReceipt
+  final bool showAuthorizationInfoOnReceipt;
+  // request.orderData.paymentInfo#atriumLabel
+  final String atriumLabel;
+  // request.orderData.paymentInfo#amountCharged
+  final String amountCharged;
+  // request.orderData.paymentInfo#currentBalance
+  final String currentBalance;
+
+  PaymentInfo(
+      {this.buyPaymentForm,
+      this.showAuthorizationInfoOnReceipt,
+      this.atriumLabel,
+      this.amountCharged,
+      this.currentBalance});
+
+  PaymentInfo.fromJson(Map<String, dynamic> json)
+      : buyPaymentForm = json['buyPaymentForm'],
+        showAuthorizationInfoOnReceipt = json['showAuthorizationInfoOnReceipt'],
+        atriumLabel = json['atriumLabel'],
+        amountCharged = json['amountCharged'],
+        currentBalance = json['currentBalance'];
+
+  Map<String, dynamic> toJson() => {
+        'buyPaymentForm': buyPaymentForm,
+        'showAuthorizationInfoOnReceipt': showAuthorizationInfoOnReceipt,
+        'atriumLabel': atriumLabel,
+        'amountCharged': amountCharged,
+        'currentBalance': currentBalance
       };
 }
 

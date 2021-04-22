@@ -97,7 +97,7 @@ class PriceLevel {
 /// ```
 /// response.response.itemImages
 /// ```
-class ItemImage {
+class ItemImages {
   // response.response.itemImages#businessContextId
   final String businessContextId;
   // response.response.itemImages#imageId
@@ -109,14 +109,14 @@ class ItemImage {
   // response.response.itemImages#tags
   final List<String> tags;
 
-  ItemImage(
+  ItemImages(
       {this.businessContextId,
       this.imageId,
       this.name,
       this.fileNames,
       this.tags});
 
-  ItemImage.fromJson(Map<String, dynamic> json)
+  ItemImages.fromJson(Map<String, dynamic> json)
       : businessContextId = json['businessContextId'],
         imageId = json['imageId'],
         name = json['name'],
@@ -334,120 +334,6 @@ class Num1 {
 
 /// Json path:
 /// ```
-/// response.addedItem.itemImages
-/// ```
-class ItemImages {
-  // response.addedItem.itemImages#businessContextId
-  final String businessContextId;
-  // response.addedItem.itemImages#imageId
-  final String imageId;
-  // response.addedItem.itemImages#name
-  final String name;
-  // response.addedItem.itemImages#fileNames
-  final List<String> fileNames;
-  // response.addedItem.itemImages#tags
-  final List<String> tags;
-
-  ItemImages(
-      {this.businessContextId,
-      this.imageId,
-      this.name,
-      this.fileNames,
-      this.tags});
-
-  ItemImages.fromJson(Map<String, dynamic> json)
-      : businessContextId = json['businessContextId'],
-        imageId = json['imageId'],
-        name = json['name'],
-        fileNames = json['fileNames']?.cast<String>(),
-        tags = json['tags']?.cast<String>();
-
-  Map<String, dynamic> toJson() => {
-        'businessContextId': businessContextId,
-        'imageId': imageId,
-        'name': name,
-        'fileNames': fileNames,
-        'tags': tags
-      };
-}
-
-/// Json path:
-/// ```
-/// request.item.properties
-/// ```
-class CartProperties {
-  // request.item.properties#cartGuid
-  final String cartGuid;
-
-  CartProperties({this.cartGuid});
-
-  CartProperties.fromJson(Map<String, dynamic> json)
-      : cartGuid = json['cartGuid'];
-
-  Map<String, dynamic> toJson() => {'cartGuid': cartGuid};
-}
-
-/// Json path:
-/// ```
-/// response.addedItem.selectedModifiers
-/// ```
-class SelectedModifiers {
-  // response.addedItem.selectedModifiers#id
-  final String id;
-  // response.addedItem.selectedModifiers#description
-  final String description;
-  // response.addedItem.selectedModifiers#selected
-  final bool selected;
-  // response.addedItem.selectedModifiers#baseAmount
-  final String baseAmount;
-  // response.addedItem.selectedModifiers#amount
-  final String amount;
-  // response.addedItem.selectedModifiers#childPriceLevelId
-  final String childPriceLevelId;
-  // response.addedItem.selectedModifiers#parentGroupId
-  final String parentGroupId;
-  // response.addedItem.selectedModifiers#currencyUnit
-  final String currencyUnit;
-  // response.addedItem.selectedModifiers#lineItemId
-  final String lineItemId;
-
-  SelectedModifiers(
-      {this.id,
-      this.description,
-      this.selected,
-      this.baseAmount,
-      this.amount,
-      this.childPriceLevelId,
-      this.parentGroupId,
-      this.currencyUnit,
-      this.lineItemId});
-
-  SelectedModifiers.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        description = json['description'],
-        selected = json['selected'],
-        baseAmount = json['baseAmount'],
-        amount = json['amount'],
-        childPriceLevelId = json['childPriceLevelId'],
-        parentGroupId = json['parentGroupId'],
-        currencyUnit = json['currencyUnit'],
-        lineItemId = json['lineItemId'];
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'description': description,
-        'selected': selected,
-        'baseAmount': baseAmount,
-        'amount': amount,
-        'childPriceLevelId': childPriceLevelId,
-        'parentGroupId': parentGroupId,
-        'currencyUnit': currencyUnit,
-        'lineItemId': lineItemId
-      };
-}
-
-/// Json path:
-/// ```
 /// request.currencyDetails
 /// ```
 class CurrencyDetails {
@@ -477,6 +363,57 @@ class CurrencyDetails {
         'currencyCultureName': currencyCultureName,
         'currencyCode': currencyCode,
         'currencySymbol': currencySymbol
+      };
+}
+
+/// Json path:
+/// ```
+/// request.schedule.properties
+/// ```
+class Properties2 {
+  // request.schedule.properties#TRANSITION_MESSAGE
+  final String transitionMessage;
+
+  Properties2({this.transitionMessage});
+
+  Properties2.fromJson(Map<String, dynamic> json)
+      : transitionMessage = json['TRANSITION_MESSAGE'];
+
+  Map<String, dynamic> toJson() => {'TRANSITION_MESSAGE': transitionMessage};
+}
+
+/// Json path:
+/// ```
+/// request.schedule
+/// ```
+class CartSchedule {
+  // request.schedule#@c
+  final String c;
+  // request.schedule#scheduledExpression
+  final String scheduledExpression;
+  // request.schedule#properties
+  final Properties2 properties;
+  // request.schedule#displayProfileState
+  final DisplayProfileState displayProfileState;
+
+  CartSchedule(
+      {this.c,
+      this.scheduledExpression,
+      this.properties,
+      this.displayProfileState});
+
+  CartSchedule.fromJson(Map<String, dynamic> json)
+      : c = json['@c'],
+        scheduledExpression = json['scheduledExpression'],
+        properties = Properties2.fromJson(json['properties'] ?? {}),
+        displayProfileState =
+            DisplayProfileState.fromJson(json['displayProfileState'] ?? {});
+
+  Map<String, dynamic> toJson() => {
+        '@c': c,
+        'scheduledExpression': scheduledExpression,
+        'properties': properties?.toJson(),
+        'displayProfileState': displayProfileState?.toJson()
       };
 }
 
@@ -764,6 +701,16 @@ class TotalRoundAmount {
 
 /// Json path:
 /// ```
+/// response.orderDetails.internalProperties
+/// ```
+class InternalProperties {
+  InternalProperties.fromJson(Map<String, dynamic> json);
+
+  Map<String, dynamic> toJson() => {};
+}
+
+/// Json path:
+/// ```
 /// request.request.data.atriumTerminal
 /// ```
 class AtriumTerminal {
@@ -822,32 +769,74 @@ class Accounts {
 
 /// Json path:
 /// ```
-/// response.data.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumCurrency
+/// response.data.paymentData.paymentRequest.transactionData.atriumPaymentRequest.atriumCurrency
 /// ```
 class AtriumCurrency {
-  // response.data.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumCurrency#currencyType
+  // response.data.paymentData.paymentRequest.transactionData.atriumPaymentRequest.atriumCurrency#currencyType
   final String currencyType;
-  // response.data.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumCurrency#total
+  // response.data.paymentData.paymentRequest.transactionData.atriumPaymentRequest.atriumCurrency#total
   final String total;
-  // response.data.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumCurrency#tax
-  final String tax;
-  // response.data.paymentData.paymentResponse.transactionData.atriumPaymentRequest.atriumCurrency#conversion
-  final dynamic conversion;
+  // response.data.paymentData.paymentRequest.transactionData.atriumPaymentRequest.atriumCurrency#tax
+  final int tax;
 
-  AtriumCurrency({this.currencyType, this.total, this.tax, this.conversion});
+  AtriumCurrency({this.currencyType, this.total, this.tax});
 
   AtriumCurrency.fromJson(Map<String, dynamic> json)
       : currencyType = json['currencyType'],
         total = json['total'],
-        tax = json['tax'],
-        conversion = json['conversion'];
+        tax = json['tax'];
+
+  Map<String, dynamic> toJson() =>
+      {'currencyType': currencyType, 'total': total, 'tax': tax};
+}
+
+/// Json path:
+/// ```
+/// response.data.paymentData.paymentRequest.transactionData.atriumPaymentRequest
+/// ```
+class AtriumPaymentRequest {
+  // response.data.paymentData.paymentRequest.transactionData.atriumPaymentRequest#tenderId
+  final String tenderId;
+  // response.data.paymentData.paymentRequest.transactionData.atriumPaymentRequest#atriumTerminal
+  final AtriumTerminal atriumTerminal;
+  // response.data.paymentData.paymentRequest.transactionData.atriumPaymentRequest#customer
+  final Customer customer;
+  // response.data.paymentData.paymentRequest.transactionData.atriumPaymentRequest#atriumCurrency
+  final AtriumCurrency atriumCurrency;
+
+  AtriumPaymentRequest(
+      {this.tenderId, this.atriumTerminal, this.customer, this.atriumCurrency});
+
+  AtriumPaymentRequest.fromJson(Map<String, dynamic> json)
+      : tenderId = json['tenderId'],
+        atriumTerminal = AtriumTerminal.fromJson(json['atriumTerminal'] ?? {}),
+        customer = Customer.fromJson(json['customer'] ?? {}),
+        atriumCurrency = AtriumCurrency.fromJson(json['atriumCurrency'] ?? {});
 
   Map<String, dynamic> toJson() => {
-        'currencyType': currencyType,
-        'total': total,
-        'tax': tax,
-        'conversion': conversion
+        'tenderId': tenderId,
+        'atriumTerminal': atriumTerminal?.toJson(),
+        'customer': customer?.toJson(),
+        'atriumCurrency': atriumCurrency?.toJson()
       };
+}
+
+/// Json path:
+/// ```
+/// response.data.paymentData.paymentRequest.transactionData
+/// ```
+class TransactionData {
+  // response.data.paymentData.paymentRequest.transactionData#atriumPaymentRequest
+  final AtriumPaymentRequest atriumPaymentRequest;
+
+  TransactionData({this.atriumPaymentRequest});
+
+  TransactionData.fromJson(Map<String, dynamic> json)
+      : atriumPaymentRequest =
+            AtriumPaymentRequest.fromJson(json['atriumPaymentRequest'] ?? {});
+
+  Map<String, dynamic> toJson() =>
+      {'atriumPaymentRequest': atriumPaymentRequest?.toJson()};
 }
 
 /// Json path:
@@ -892,6 +881,55 @@ class OfflineStatus {
 
 /// Json path:
 /// ```
+/// response.data.paymentData.paymentResponse.paymentSupport
+/// ```
+class PaymentSupport {
+  // response.data.paymentData.paymentResponse.paymentSupport#amount
+  final Price amount;
+  // response.data.paymentData.paymentResponse.paymentSupport#tipAmount
+  final TipAmount tipAmount;
+  // response.data.paymentData.paymentResponse.paymentSupport#paymentForm
+  final String paymentForm;
+  // response.data.paymentData.paymentResponse.paymentSupport#paymentState
+  final String paymentState;
+  // response.data.paymentData.paymentResponse.paymentSupport#offlineStatus
+  final OfflineStatus offlineStatus;
+  // response.data.paymentData.paymentResponse.paymentSupport#amountModification
+  final dynamic amountModification;
+  // response.data.paymentData.paymentResponse.paymentSupport#refundSupported
+  final bool refundSupported;
+
+  PaymentSupport(
+      {this.amount,
+      this.tipAmount,
+      this.paymentForm,
+      this.paymentState,
+      this.offlineStatus,
+      this.amountModification,
+      this.refundSupported});
+
+  PaymentSupport.fromJson(Map<String, dynamic> json)
+      : amount = Price.fromJson(json['amount'] ?? {}),
+        tipAmount = TipAmount.fromJson(json['tipAmount'] ?? {}),
+        paymentForm = json['paymentForm'],
+        paymentState = json['paymentState'],
+        offlineStatus = OfflineStatus.fromJson(json['offlineStatus'] ?? {}),
+        amountModification = json['amountModification'],
+        refundSupported = json['refundSupported'];
+
+  Map<String, dynamic> toJson() => {
+        'amount': amount?.toJson(),
+        'tipAmount': tipAmount?.toJson(),
+        'paymentForm': paymentForm,
+        'paymentState': paymentState,
+        'offlineStatus': offlineStatus?.toJson(),
+        'amountModification': amountModification,
+        'refundSupported': refundSupported
+      };
+}
+
+/// Json path:
+/// ```
 /// response.data.digitalSignature
 /// ```
 class DigitalSignature {
@@ -910,93 +948,24 @@ class DigitalSignature {
       {'dataEncoding': dataEncoding, 'base64': base64};
 }
 
-/// Json path:
-/// ```
-/// response.closedOrder.receiptData.receiptJson.orderData.paymentInfo
-/// ```
-class PaymentInfo {
-  // response.closedOrder.receiptData.receiptJson.orderData.paymentInfo#buyPaymentForm
-  final String buyPaymentForm;
-  // response.closedOrder.receiptData.receiptJson.orderData.paymentInfo#showAuthorizationInfoOnReceipt
-  final bool showAuthorizationInfoOnReceipt;
-  // response.closedOrder.receiptData.receiptJson.orderData.paymentInfo#atriumLabel
-  final String atriumLabel;
-  // response.closedOrder.receiptData.receiptJson.orderData.paymentInfo#amountCharged
-  final String amountCharged;
-  // response.closedOrder.receiptData.receiptJson.orderData.paymentInfo#currentBalance
-  final String currentBalance;
-
-  PaymentInfo(
-      {this.buyPaymentForm,
-      this.showAuthorizationInfoOnReceipt,
-      this.atriumLabel,
-      this.amountCharged,
-      this.currentBalance});
-
-  PaymentInfo.fromJson(Map<String, dynamic> json)
-      : buyPaymentForm = json['buyPaymentForm'],
-        showAuthorizationInfoOnReceipt = json['showAuthorizationInfoOnReceipt'],
-        atriumLabel = json['atriumLabel'],
-        amountCharged = json['amountCharged'],
-        currentBalance = json['currentBalance'];
-
-  Map<String, dynamic> toJson() => {
-        'buyPaymentForm': buyPaymentForm,
-        'showAuthorizationInfoOnReceipt': showAuthorizationInfoOnReceipt,
-        'atriumLabel': atriumLabel,
-        'amountCharged': amountCharged,
-        'currentBalance': currentBalance
-      };
-}
-
-/// Json path:
-/// ```
-/// response.closedOrder.receiptData.receiptJson.orderData.currencyInfo
-/// ```
-class CurrencyInfo {
-  // response.closedOrder.receiptData.receiptJson.orderData.currencyInfo#currencyCultureName
-  final String currencyCultureName;
-  // response.closedOrder.receiptData.receiptJson.orderData.currencyInfo#currencyCode
-  final String currencyCode;
-  // response.closedOrder.receiptData.receiptJson.orderData.currencyInfo#currencyDecimalDigits
-  final String currencyDecimalDigits;
-  // response.closedOrder.receiptData.receiptJson.orderData.currencyInfo#currencySymbol
-  final String currencySymbol;
-
-  CurrencyInfo(
-      {this.currencyCultureName,
-      this.currencyCode,
-      this.currencyDecimalDigits,
-      this.currencySymbol});
-
-  CurrencyInfo.fromJson(Map<String, dynamic> json)
-      : currencyCultureName = json['currencyCultureName'],
-        currencyCode = json['currencyCode'],
-        currencyDecimalDigits = json['currencyDecimalDigits'],
-        currencySymbol = json['currencySymbol'];
-
-  Map<String, dynamic> toJson() => {
-        'currencyCultureName': currencyCultureName,
-        'currencyCode': currencyCode,
-        'currencyDecimalDigits': currencyDecimalDigits,
-        'currencySymbol': currencySymbol
-      };
-}
-
 class PriceLevels {
   // response.response.priceLevels#priceLevels
   final List<PriceLevel> priceLevels;
+  // request.item.priceLevels#1
+  final Num1 num1;
 
-  PriceLevels({this.priceLevels});
+  PriceLevels({this.priceLevels, this.num1});
 
   PriceLevels.fromJson(Map<String, dynamic> json)
       : priceLevels = json.keys
             .map((e) => PriceLevel.fromJson(e, json[e] ?? {}))
-            .toList();
+            .toList(),
+        num1 = Num1.fromJson(json['1'] ?? {});
 
   Map<String, dynamic> toJson() => {
         'priceLevels': Map.fromIterables(priceLevels?.map((e) => e.getKey()),
-            priceLevels?.map((e) => e?.toJson()))
+            priceLevels?.map((e) => e?.toJson())),
+        '1': num1?.toJson()
       };
 }
 
@@ -1212,6 +1181,73 @@ class CustomLabels {
         'Gluten Free': glutenFree?.toJson(),
         'Healthy': healthy?.toJson(),
         'Vegan': vegan?.toJson()
+      };
+}
+
+class CartProperties {
+  // request.item.properties#cartGuid
+  final String cartGuid;
+
+  CartProperties({this.cartGuid});
+
+  CartProperties.fromJson(Map<String, dynamic> json)
+      : cartGuid = json['cartGuid'];
+
+  Map<String, dynamic> toJson() => {'cartGuid': cartGuid};
+}
+
+class SelectedModifiers {
+  // request.receiptInfo.items.selectedModifiers#id
+  final String id;
+  // request.receiptInfo.items.selectedModifiers#description
+  final String description;
+  // request.receiptInfo.items.selectedModifiers#selected
+  final bool selected;
+  // request.receiptInfo.items.selectedModifiers#baseAmount
+  final String baseAmount;
+  // request.receiptInfo.items.selectedModifiers#amount
+  final String amount;
+  // request.receiptInfo.items.selectedModifiers#childPriceLevelId
+  final String childPriceLevelId;
+  // request.receiptInfo.items.selectedModifiers#parentGroupId
+  final String parentGroupId;
+  // request.receiptInfo.items.selectedModifiers#currencyUnit
+  final String currencyUnit;
+  // request.receiptInfo.items.selectedModifiers#lineItemId
+  final String lineItemId;
+
+  SelectedModifiers(
+      {this.id,
+      this.description,
+      this.selected,
+      this.baseAmount,
+      this.amount,
+      this.childPriceLevelId,
+      this.parentGroupId,
+      this.currencyUnit,
+      this.lineItemId});
+
+  SelectedModifiers.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        description = json['description'],
+        selected = json['selected'],
+        baseAmount = json['baseAmount'],
+        amount = json['amount'],
+        childPriceLevelId = json['childPriceLevelId'],
+        parentGroupId = json['parentGroupId'],
+        currencyUnit = json['currencyUnit'],
+        lineItemId = json['lineItemId'];
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'description': description,
+        'selected': selected,
+        'baseAmount': baseAmount,
+        'amount': amount,
+        'childPriceLevelId': childPriceLevelId,
+        'parentGroupId': parentGroupId,
+        'currencyUnit': currencyUnit,
+        'lineItemId': lineItemId
       };
 }
 

@@ -1,56 +1,5 @@
 import 'base.dart';
 
-/// Json path:
-/// ```
-/// request.schedule.properties
-/// ```
-class Properties {
-  // request.schedule.properties#TRANSITION_MESSAGE
-  final String transitionMessage;
-
-  Properties({this.transitionMessage});
-
-  Properties.fromJson(Map<String, dynamic> json)
-      : transitionMessage = json['TRANSITION_MESSAGE'];
-
-  Map<String, dynamic> toJson() => {'TRANSITION_MESSAGE': transitionMessage};
-}
-
-/// Json path:
-/// ```
-/// request.schedule
-/// ```
-class CartSchedule {
-  // request.schedule#@c
-  final String c;
-  // request.schedule#scheduledExpression
-  final String scheduledExpression;
-  // request.schedule#properties
-  final Properties properties;
-  // request.schedule#displayProfileState
-  final DisplayProfileState displayProfileState;
-
-  CartSchedule(
-      {this.c,
-      this.scheduledExpression,
-      this.properties,
-      this.displayProfileState});
-
-  CartSchedule.fromJson(Map<String, dynamic> json)
-      : c = json['@c'],
-        scheduledExpression = json['scheduledExpression'],
-        properties = Properties.fromJson(json['properties'] ?? {}),
-        displayProfileState =
-            DisplayProfileState.fromJson(json['displayProfileState'] ?? {});
-
-  Map<String, dynamic> toJson() => {
-        '@c': c,
-        'scheduledExpression': scheduledExpression,
-        'properties': properties?.toJson(),
-        'displayProfileState': displayProfileState?.toJson()
-      };
-}
-
 /// Url: https://ondemand.rit.edu/api/order/1312/dc9df36d-8a64-42cf-b7c1-fa041f5f3cfd/orders/5e446350-e67d-4ec3-a348-2393ccc63691
 /// Method: PUT
 /// Json path:
@@ -105,6 +54,60 @@ class Request extends BaseRequest {
 
 /// Json path:
 /// ```
+/// response.orderDetails.lineItems.properties
+/// ```
+class Properties3 {
+  // response.orderDetails.lineItems.properties#mealPeriodId
+  final String mealPeriodId;
+  // response.orderDetails.lineItems.properties#priceLevelId
+  final String priceLevelId;
+  // response.orderDetails.lineItems.properties#displayText
+  final String displayText;
+  // response.orderDetails.lineItems.properties#image
+  final String image;
+  // response.orderDetails.lineItems.properties#amount
+  final String amount;
+  // response.orderDetails.lineItems.properties#tagNames
+  final String tagNames;
+  // response.orderDetails.lineItems.properties#count
+  final String count;
+  // response.orderDetails.lineItems.properties#quantity
+  final String quantity;
+
+  Properties3(
+      {this.mealPeriodId,
+      this.priceLevelId,
+      this.displayText,
+      this.image,
+      this.amount,
+      this.tagNames,
+      this.count,
+      this.quantity});
+
+  Properties3.fromJson(Map<String, dynamic> json)
+      : mealPeriodId = json['mealPeriodId'],
+        priceLevelId = json['priceLevelId'],
+        displayText = json['displayText'],
+        image = json['image'],
+        amount = json['amount'],
+        tagNames = json['tagNames'],
+        count = json['count'],
+        quantity = json['quantity'];
+
+  Map<String, dynamic> toJson() => {
+        'mealPeriodId': mealPeriodId,
+        'priceLevelId': priceLevelId,
+        'displayText': displayText,
+        'image': image,
+        'amount': amount,
+        'tagNames': tagNames,
+        'count': count,
+        'quantity': quantity
+      };
+}
+
+/// Json path:
+/// ```
 /// response.orderDetails.lineItems
 /// ```
 class LineItems {
@@ -137,7 +140,7 @@ class LineItems {
   // response.orderDetails.lineItems#lineItemTax
   final dynamic lineItemTax;
   // response.orderDetails.lineItems#properties
-  final Properties properties;
+  final Properties3 properties;
 
   LineItems(
       {this.itemId,
@@ -171,7 +174,7 @@ class LineItems {
         price = Price.fromJson(json['price'] ?? {}),
         lineItemGroups = json['lineItemGroups'],
         lineItemTax = json['lineItemTax'],
-        properties = Properties.fromJson(json['properties'] ?? {});
+        properties = Properties3.fromJson(json['properties'] ?? {});
 
   Map<String, dynamic> toJson() => {
         'itemId': itemId,
@@ -272,12 +275,71 @@ class TaxBreakdown {
 
 /// Json path:
 /// ```
-/// response.orderDetails.internalProperties
+/// response.orderDetails.properties
 /// ```
-class InternalProperties {
-  InternalProperties.fromJson(Map<String, dynamic> json);
+class Properties4 {
+  // response.orderDetails.properties#orderNumberSequenceLength
+  final String orderNumberSequenceLength;
+  // response.orderDetails.properties#profitCenterId
+  final String profitCenterId;
+  // response.orderDetails.properties#orderNumberNameSpace
+  final String orderNumberNameSpace;
+  // response.orderDetails.properties#openTerminalId
+  final String openTerminalId;
+  // response.orderDetails.properties#mealPeriodId
+  final String mealPeriodId;
+  // response.orderDetails.properties#checkTypeId
+  final String checkTypeId;
+  // response.orderDetails.properties#closedTerminalId
+  final String closedTerminalId;
+  // response.orderDetails.properties#voidReasonId
+  final String voidReasonId;
+  // response.orderDetails.properties#employeeId
+  final String employeeId;
+  // response.orderDetails.properties#orderSourceSystem
+  final String orderSourceSystem;
+  // response.orderDetails.properties#useIgOrderApi
+  final String useIgOrderApi;
 
-  Map<String, dynamic> toJson() => {};
+  Properties4(
+      {this.orderNumberSequenceLength,
+      this.profitCenterId,
+      this.orderNumberNameSpace,
+      this.openTerminalId,
+      this.mealPeriodId,
+      this.checkTypeId,
+      this.closedTerminalId,
+      this.voidReasonId,
+      this.employeeId,
+      this.orderSourceSystem,
+      this.useIgOrderApi});
+
+  Properties4.fromJson(Map<String, dynamic> json)
+      : orderNumberSequenceLength = json['orderNumberSequenceLength'],
+        profitCenterId = json['profitCenterId'],
+        orderNumberNameSpace = json['orderNumberNameSpace'],
+        openTerminalId = json['openTerminalId'],
+        mealPeriodId = json['mealPeriodId'],
+        checkTypeId = json['checkTypeId'],
+        closedTerminalId = json['closedTerminalId'],
+        voidReasonId = json['voidReasonId'],
+        employeeId = json['employeeId'],
+        orderSourceSystem = json['orderSourceSystem'],
+        useIgOrderApi = json['useIgOrderApi'];
+
+  Map<String, dynamic> toJson() => {
+        'orderNumberSequenceLength': orderNumberSequenceLength,
+        'profitCenterId': profitCenterId,
+        'orderNumberNameSpace': orderNumberNameSpace,
+        'openTerminalId': openTerminalId,
+        'mealPeriodId': mealPeriodId,
+        'checkTypeId': checkTypeId,
+        'closedTerminalId': closedTerminalId,
+        'voidReasonId': voidReasonId,
+        'employeeId': employeeId,
+        'orderSourceSystem': orderSourceSystem,
+        'useIgOrderApi': useIgOrderApi
+      };
 }
 
 /// Json path:
@@ -345,7 +407,7 @@ class OrderDetails {
   // response.orderDetails#payments2
   final List<dynamic> payments2;
   // response.orderDetails#properties
-  final Properties properties;
+  final Properties4 properties;
   // response.orderDetails#internalProperties
   final InternalProperties internalProperties;
   // response.orderDetails#scheduledOrderCompletionTimeStamp
@@ -427,7 +489,7 @@ class OrderDetails {
         taxBreakdown = TaxBreakdown.fromJson(json['taxBreakdown'] ?? {}),
         payments = json['payments'],
         payments2 = json['payments2'],
-        properties = Properties.fromJson(json['properties'] ?? {}),
+        properties = Properties4.fromJson(json['properties'] ?? {}),
         internalProperties =
             InternalProperties.fromJson(json['internalProperties'] ?? {}),
         scheduledOrderCompletionTimeStamp =
@@ -469,6 +531,21 @@ class OrderDetails {
         'internalProperties': internalProperties?.toJson(),
         'scheduledOrderCompletionTimeStamp': scheduledOrderCompletionTimeStamp
       };
+}
+
+/// Json path:
+/// ```
+/// response.addedItem.properties
+/// ```
+class Properties5 {
+  // response.addedItem.properties#cartGuid
+  final String cartGuid;
+
+  Properties5({this.cartGuid});
+
+  Properties5.fromJson(Map<String, dynamic> json) : cartGuid = json['cartGuid'];
+
+  Map<String, dynamic> toJson() => {'cartGuid': cartGuid};
 }
 
 /// Json path:
@@ -549,7 +626,7 @@ class AddedItem {
   // response.addedItem#isSubstituteItem
   final bool isSubstituteItem;
   // response.addedItem#properties
-  final Properties properties;
+  final Properties5 properties;
   // response.addedItem#amount
   final String amount;
   // response.addedItem#image
@@ -668,7 +745,7 @@ class AddedItem {
         tagIds = json['tagIds'],
         substituteItemId = json['substituteItemId'],
         isSubstituteItem = json['isSubstituteItem'],
-        properties = Properties.fromJson(json['properties'] ?? {}),
+        properties = Properties5.fromJson(json['properties'] ?? {}),
         amount = json['amount'],
         image = json['image'],
         thumbnail = json['thumbnail'],

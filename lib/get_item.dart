@@ -450,7 +450,7 @@ class Response extends BaseResponse {
   // response#displayText
   final String displayText;
   // response#itemImages
-  final List<ItemImage> itemImages;
+  final List<ItemImages> itemImages;
   // response#isAvailableToGuests
   final bool isAvailableToGuests;
   // response#isPreselectedToGuests
@@ -560,7 +560,7 @@ class Response extends BaseResponse {
             ?.toList(),
         displayText = json['displayText'],
         itemImages = (json['itemImages'] as List)
-            ?.map((e) => ItemImage.fromJson(e ?? {}))
+            ?.map((e) => ItemImages.fromJson(e ?? {}))
             ?.toList(),
         isAvailableToGuests = json['isAvailableToGuests'],
         isPreselectedToGuests = json['isPreselectedToGuests'],

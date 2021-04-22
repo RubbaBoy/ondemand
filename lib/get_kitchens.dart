@@ -190,12 +190,12 @@ class DisplayOptions {
 
 /// Json path:
 /// ```
-/// response.response.allAvailableList.availableAt.openWindowTimeFrames
+/// response.response.availableAt.openWindowTimeFrames
 /// ```
 class OpenWindowTimeFrames {
-  // response.response.allAvailableList.availableAt.openWindowTimeFrames#opens
+  // response.response.availableAt.openWindowTimeFrames#opens
   final String opens;
-  // response.response.allAvailableList.availableAt.openWindowTimeFrames#closes
+  // response.response.availableAt.openWindowTimeFrames#closes
   final String closes;
 
   OpenWindowTimeFrames({this.opens, this.closes});
@@ -209,20 +209,20 @@ class OpenWindowTimeFrames {
 
 /// Json path:
 /// ```
-/// response.response.allAvailableList.availableAt
+/// response.response.availableAt
 /// ```
 class AvailableAt {
-  // response.response.allAvailableList.availableAt#opens
+  // response.response.availableAt#opens
   final String opens;
-  // response.response.allAvailableList.availableAt#closes
+  // response.response.availableAt#closes
   final String closes;
-  // response.response.allAvailableList.availableAt#availableNow
+  // response.response.availableAt#availableNow
   final bool availableNow;
-  // response.response.allAvailableList.availableAt#conceptsAvailableNow
+  // response.response.availableAt#conceptsAvailableNow
   final bool conceptsAvailableNow;
-  // response.response.allAvailableList.availableAt#closingIn
+  // response.response.availableAt#closingIn
   final int closingIn;
-  // response.response.allAvailableList.availableAt#openWindowTimeFrames
+  // response.response.availableAt#openWindowTimeFrames
   final List<OpenWindowTimeFrames> openWindowTimeFrames;
 
   AvailableAt(
@@ -279,42 +279,34 @@ class AllAvailableList {
 
 /// Json path:
 /// ```
-/// response.response.atriumConfig.autoDeduct
+/// response.response.pay.payOptions.autoDeduct
 /// ```
 class AutoDeduct {
-  // response.response.atriumConfig.autoDeduct#displayName
-  final String displayName;
-  // response.response.atriumConfig.autoDeduct#isEnabled
+  // response.response.pay.payOptions.autoDeduct#isEnabled
   final bool isEnabled;
 
-  AutoDeduct({this.displayName, this.isEnabled});
+  AutoDeduct({this.isEnabled});
 
   AutoDeduct.fromJson(Map<String, dynamic> json)
-      : displayName = json['displayName'],
-        isEnabled = json['isEnabled'];
+      : isEnabled = json['isEnabled'];
 
-  Map<String, dynamic> toJson() =>
-      {'displayName': displayName, 'isEnabled': isEnabled};
+  Map<String, dynamic> toJson() => {'isEnabled': isEnabled};
 }
 
 /// Json path:
 /// ```
-/// response.response.atriumConfig.manualDeduct
+/// response.response.pay.payOptions.manualDeduct
 /// ```
 class ManualDeduct {
-  // response.response.atriumConfig.manualDeduct#isEnabled
+  // response.response.pay.payOptions.manualDeduct#isEnabled
   final bool isEnabled;
-  // response.response.atriumConfig.manualDeduct#displayName
-  final String displayName;
 
-  ManualDeduct({this.isEnabled, this.displayName});
+  ManualDeduct({this.isEnabled});
 
   ManualDeduct.fromJson(Map<String, dynamic> json)
-      : isEnabled = json['isEnabled'],
-        displayName = json['displayName'];
+      : isEnabled = json['isEnabled'];
 
-  Map<String, dynamic> toJson() =>
-      {'isEnabled': isEnabled, 'displayName': displayName};
+  Map<String, dynamic> toJson() => {'isEnabled': isEnabled};
 }
 
 /// Json path:
@@ -1054,20 +1046,20 @@ class AtriumConfig {
 
 /// Json path:
 /// ```
-/// response.response.limitItemsByClassification.classificationDetails
+/// response.response.cartScreen.limitItemsByClassification.classificationDetails
 /// ```
 class ClassificationDetails {
-  // response.response.limitItemsByClassification.classificationDetails#classifiedBy
+  // response.response.cartScreen.limitItemsByClassification.classificationDetails#classifiedBy
   final String classifiedBy;
-  // response.response.limitItemsByClassification.classificationDetails#maxItems
+  // response.response.cartScreen.limitItemsByClassification.classificationDetails#maxItems
   final int maxItems;
-  // response.response.limitItemsByClassification.classificationDetails#alertHeaderText
+  // response.response.cartScreen.limitItemsByClassification.classificationDetails#alertHeaderText
   final String alertHeaderText;
-  // response.response.limitItemsByClassification.classificationDetails#alertInstructionText
+  // response.response.cartScreen.limitItemsByClassification.classificationDetails#alertInstructionText
   final String alertInstructionText;
-  // response.response.limitItemsByClassification.classificationDetails#revenueCategoryIds
+  // response.response.cartScreen.limitItemsByClassification.classificationDetails#revenueCategoryIds
   final List<dynamic> revenueCategoryIds;
-  // response.response.limitItemsByClassification.classificationDetails#productClassIds
+  // response.response.cartScreen.limitItemsByClassification.classificationDetails#productClassIds
   final List<dynamic> productClassIds;
 
   ClassificationDetails(
@@ -1098,12 +1090,12 @@ class ClassificationDetails {
 
 /// Json path:
 /// ```
-/// response.response.limitItemsByClassification
+/// response.response.cartScreen.limitItemsByClassification
 /// ```
 class LimitItemsByClassification {
-  // response.response.limitItemsByClassification#featureEnabled
+  // response.response.cartScreen.limitItemsByClassification#featureEnabled
   final bool featureEnabled;
-  // response.response.limitItemsByClassification#classificationDetails
+  // response.response.cartScreen.limitItemsByClassification#classificationDetails
   final List<ClassificationDetails> classificationDetails;
 
   LimitItemsByClassification({this.featureEnabled, this.classificationDetails});

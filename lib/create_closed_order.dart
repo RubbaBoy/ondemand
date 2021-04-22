@@ -56,40 +56,90 @@ class Properties {
 
 /// Json path:
 /// ```
-/// response.closedOrder.receiptData.receiptJson.orderData.lineItems
+/// request.order.lineItems
 /// ```
 class LineItems {
-  // response.closedOrder.receiptData.receiptJson.orderData.lineItems#quantity
+  // request.order.lineItems#itemId
+  final String itemId;
+  // request.order.lineItems#igItemId
+  final String igItemId;
+  // request.order.lineItems#itemType
+  final String itemType;
+  // request.order.lineItems#lineItemId
+  final String lineItemId;
+  // request.order.lineItems#soldByWeight
+  final bool soldByWeight;
+  // request.order.lineItems#lineItemState
+  final String lineItemState;
+  // request.order.lineItems#weight
+  final int weight;
+  // request.order.lineItems#tareWeight
+  final int tareWeight;
+  // request.order.lineItems#quantity
   final int quantity;
-  // response.closedOrder.receiptData.receiptJson.orderData.lineItems#price
-  final String price;
-  // response.closedOrder.receiptData.receiptJson.orderData.lineItems#displayText
-  final String displayText;
-  // response.closedOrder.receiptData.receiptJson.orderData.lineItems#splInstruction
-  final String splInstruction;
-  // response.closedOrder.receiptData.receiptJson.orderData.lineItems#lineItemGroups
+  // request.order.lineItems#ancestorQuantityMultipliers
+  final List<dynamic> ancestorQuantityMultipliers;
+  // request.order.lineItems#totalQuantity
+  final int totalQuantity;
+  // request.order.lineItems#price
+  final Price price;
+  // request.order.lineItems#lineItemGroups
   final List<dynamic> lineItemGroups;
+  // request.order.lineItems#lineItemTax
+  final dynamic lineItemTax;
+  // request.order.lineItems#properties
+  final Properties properties;
 
   LineItems(
-      {this.quantity,
+      {this.itemId,
+      this.igItemId,
+      this.itemType,
+      this.lineItemId,
+      this.soldByWeight,
+      this.lineItemState,
+      this.weight,
+      this.tareWeight,
+      this.quantity,
+      this.ancestorQuantityMultipliers,
+      this.totalQuantity,
       this.price,
-      this.displayText,
-      this.splInstruction,
-      this.lineItemGroups});
+      this.lineItemGroups,
+      this.lineItemTax,
+      this.properties});
 
   LineItems.fromJson(Map<String, dynamic> json)
-      : quantity = json['quantity'],
-        price = json['price'],
-        displayText = json['displayText'],
-        splInstruction = json['splInstruction'],
-        lineItemGroups = json['lineItemGroups'];
+      : itemId = json['itemId'],
+        igItemId = json['igItemId'],
+        itemType = json['itemType'],
+        lineItemId = json['lineItemId'],
+        soldByWeight = json['soldByWeight'],
+        lineItemState = json['lineItemState'],
+        weight = json['weight'],
+        tareWeight = json['tareWeight'],
+        quantity = json['quantity'],
+        ancestorQuantityMultipliers = json['ancestorQuantityMultipliers'],
+        totalQuantity = json['totalQuantity'],
+        price = Price.fromJson(json['price'] ?? {}),
+        lineItemGroups = json['lineItemGroups'],
+        lineItemTax = json['lineItemTax'],
+        properties = Properties.fromJson(json['properties'] ?? {});
 
   Map<String, dynamic> toJson() => {
+        'itemId': itemId,
+        'igItemId': igItemId,
+        'itemType': itemType,
+        'lineItemId': lineItemId,
+        'soldByWeight': soldByWeight,
+        'lineItemState': lineItemState,
+        'weight': weight,
+        'tareWeight': tareWeight,
         'quantity': quantity,
-        'price': price,
-        'displayText': displayText,
-        'splInstruction': splInstruction,
-        'lineItemGroups': lineItemGroups
+        'ancestorQuantityMultipliers': ancestorQuantityMultipliers,
+        'totalQuantity': totalQuantity,
+        'price': price?.toJson(),
+        'lineItemGroups': lineItemGroups,
+        'lineItemTax': lineItemTax,
+        'properties': properties?.toJson()
       };
 }
 
@@ -115,16 +165,16 @@ class Amount {
 
 /// Json path:
 /// ```
-/// response.closedOrder.taxBreakdown.salesTaxes
+/// request.order.taxBreakdown.salesTaxes
 /// ```
 class SalesTaxes {
-  // response.closedOrder.taxBreakdown.salesTaxes#id
+  // request.order.taxBreakdown.salesTaxes#id
   final String id;
-  // response.closedOrder.taxBreakdown.salesTaxes#taxClassName
+  // request.order.taxBreakdown.salesTaxes#taxClassName
   final String taxClassName;
-  // response.closedOrder.taxBreakdown.salesTaxes#taxPercent
+  // request.order.taxBreakdown.salesTaxes#taxPercent
   final int taxPercent;
-  // response.closedOrder.taxBreakdown.salesTaxes#amount
+  // request.order.taxBreakdown.salesTaxes#amount
   final Amount amount;
 
   SalesTaxes({this.id, this.taxClassName, this.taxPercent, this.amount});
@@ -145,14 +195,14 @@ class SalesTaxes {
 
 /// Json path:
 /// ```
-/// response.closedOrder.taxBreakdown
+/// request.order.taxBreakdown
 /// ```
 class TaxBreakdown {
-  // response.closedOrder.taxBreakdown#isVatEnabled
+  // request.order.taxBreakdown#isVatEnabled
   final bool isVatEnabled;
-  // response.closedOrder.taxBreakdown#salesTaxes
+  // request.order.taxBreakdown#salesTaxes
   final List<SalesTaxes> salesTaxes;
-  // response.closedOrder.taxBreakdown#vatTaxes
+  // request.order.taxBreakdown#vatTaxes
   final List<dynamic> vatTaxes;
 
   TaxBreakdown({this.isVatEnabled, this.salesTaxes, this.vatTaxes});
@@ -169,24 +219,6 @@ class TaxBreakdown {
         'salesTaxes': salesTaxes?.map((e) => e?.toJson())?.toList(),
         'vatTaxes': vatTaxes
       };
-}
-
-/// Json path:
-/// ```
-/// response.closedOrder.internalProperties
-/// ```
-class InternalProperties {
-  // response.closedOrder.internalProperties#aspenInventoryPostingPaymentDtos
-  final String aspenInventoryPostingPaymentDtos;
-
-  InternalProperties({this.aspenInventoryPostingPaymentDtos});
-
-  InternalProperties.fromJson(Map<String, dynamic> json)
-      : aspenInventoryPostingPaymentDtos =
-            json['aspenInventoryPostingPaymentDtos'];
-
-  Map<String, dynamic> toJson() =>
-      {'aspenInventoryPostingPaymentDtos': aspenInventoryPostingPaymentDtos};
 }
 
 /// Json path:
@@ -559,16 +591,16 @@ class IgSettings {
 
 /// Json path:
 /// ```
-/// response.closedOrder.deliveryProperties.deliveryOption
+/// request.deliveryProperties.deliveryOption
 /// ```
 class DeliveryOption {
-  // response.closedOrder.deliveryProperties.deliveryOption#id
+  // request.deliveryProperties.deliveryOption#id
   final String id;
-  // response.closedOrder.deliveryProperties.deliveryOption#kitchenText
+  // request.deliveryProperties.deliveryOption#kitchenText
   final String kitchenText;
-  // response.closedOrder.deliveryProperties.deliveryOption#displayText
+  // request.deliveryProperties.deliveryOption#displayText
   final String displayText;
-  // response.closedOrder.deliveryProperties.deliveryOption#isEnabled
+  // request.deliveryProperties.deliveryOption#isEnabled
   final bool isEnabled;
 
   DeliveryOption({this.id, this.kitchenText, this.displayText, this.isEnabled});
@@ -589,12 +621,12 @@ class DeliveryOption {
 
 /// Json path:
 /// ```
-/// response.closedOrder.deliveryProperties
+/// request.deliveryProperties
 /// ```
 class DeliveryProperties {
-  // response.closedOrder.deliveryProperties#deliveryOption
+  // request.deliveryProperties#deliveryOption
   final DeliveryOption deliveryOption;
-  // response.closedOrder.deliveryProperties#nameString
+  // request.deliveryProperties#nameString
   final String nameString;
 
   DeliveryProperties({this.deliveryOption, this.nameString});
@@ -648,74 +680,6 @@ class PaymentAction {
 
 /// Json path:
 /// ```
-/// request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentRequest
-/// ```
-class AtriumPaymentRequest {
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentRequest#tenderId
-  final String tenderId;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentRequest#atriumTerminal
-  final AtriumTerminal atriumTerminal;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentRequest#customer
-  final Customer customer;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentRequest#atriumCurrency
-  final AtriumCurrency atriumCurrency;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentRequest#overrideTaxExempt
-  final dynamic overrideTaxExempt;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentRequest#properties
-  final Properties properties;
-
-  AtriumPaymentRequest(
-      {this.tenderId,
-      this.atriumTerminal,
-      this.customer,
-      this.atriumCurrency,
-      this.overrideTaxExempt,
-      this.properties});
-
-  AtriumPaymentRequest.fromJson(Map<String, dynamic> json)
-      : tenderId = json['tenderId'],
-        atriumTerminal = AtriumTerminal.fromJson(json['atriumTerminal'] ?? {}),
-        customer = Customer.fromJson(json['customer'] ?? {}),
-        atriumCurrency = AtriumCurrency.fromJson(json['atriumCurrency'] ?? {}),
-        overrideTaxExempt = json['overrideTaxExempt'],
-        properties = Properties.fromJson(json['properties'] ?? {});
-
-  Map<String, dynamic> toJson() => {
-        'tenderId': tenderId,
-        'atriumTerminal': atriumTerminal?.toJson(),
-        'customer': customer?.toJson(),
-        'atriumCurrency': atriumCurrency?.toJson(),
-        'overrideTaxExempt': overrideTaxExempt,
-        'properties': properties?.toJson()
-      };
-}
-
-/// Json path:
-/// ```
-/// request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData
-/// ```
-class TransactionData {
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData#atriumPaymentRequest
-  final AtriumPaymentRequest atriumPaymentRequest;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData#atriumPaymentResponse
-  final AtriumPaymentResponse atriumPaymentResponse;
-
-  TransactionData({this.atriumPaymentRequest, this.atriumPaymentResponse});
-
-  TransactionData.fromJson(Map<String, dynamic> json)
-      : atriumPaymentRequest =
-            AtriumPaymentRequest.fromJson(json['atriumPaymentRequest'] ?? {}),
-        atriumPaymentResponse =
-            AtriumPaymentResponse.fromJson(json['atriumPaymentResponse'] ?? {});
-
-  Map<String, dynamic> toJson() => {
-        'atriumPaymentRequest': atriumPaymentRequest?.toJson(),
-        'atriumPaymentResponse': atriumPaymentResponse?.toJson()
-      };
-}
-
-/// Json path:
-/// ```
 /// request.atriumPaymentAccounts.authResponse.paymentData.paymentRequest
 /// ```
 class PaymentRequest {
@@ -761,111 +725,6 @@ class PaymentRequest {
         'paymentProviderId': paymentProviderId,
         'transactionData': transactionData?.toJson(),
         'properties': properties?.toJson()
-      };
-}
-
-/// Json path:
-/// ```
-/// request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentResponse
-/// ```
-class AtriumPaymentResponse {
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentResponse#txid
-  final int txid;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentResponse#approved
-  final int approved;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentResponse#code
-  final String code;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentResponse#message
-  final String message;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentResponse#time
-  final int time;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentResponse#amount
-  final Amount amount;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentResponse#accounts
-  final List<Accounts> accounts;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.transactionData.atriumPaymentResponse#type
-  final String type;
-
-  AtriumPaymentResponse(
-      {this.txid,
-      this.approved,
-      this.code,
-      this.message,
-      this.time,
-      this.amount,
-      this.accounts,
-      this.type});
-
-  AtriumPaymentResponse.fromJson(Map<String, dynamic> json)
-      : txid = json['txid'],
-        approved = json['approved'],
-        code = json['code'],
-        message = json['message'],
-        time = json['time'],
-        amount = Amount.fromJson(json['amount'] ?? {}),
-        accounts = (json['accounts'] as List)
-            ?.map((e) => Accounts.fromJson(e ?? {}))
-            ?.toList(),
-        type = json['type'];
-
-  Map<String, dynamic> toJson() => {
-        'txid': txid,
-        'approved': approved,
-        'code': code,
-        'message': message,
-        'time': time,
-        'amount': amount?.toJson(),
-        'accounts': accounts?.map((e) => e?.toJson())?.toList(),
-        'type': type
-      };
-}
-
-/// Json path:
-/// ```
-/// request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.paymentSupport
-/// ```
-class PaymentSupport {
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.paymentSupport#amount
-  final Amount amount;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.paymentSupport#tipAmount
-  final TipAmount tipAmount;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.paymentSupport#paymentForm
-  final String paymentForm;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.paymentSupport#paymentState
-  final String paymentState;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.paymentSupport#offlineStatus
-  final OfflineStatus offlineStatus;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.paymentSupport#amountModification
-  final dynamic amountModification;
-  // request.atriumPaymentAccounts.authResponse.paymentData.paymentResponse.paymentSupport#refundSupported
-  final bool refundSupported;
-
-  PaymentSupport(
-      {this.amount,
-      this.tipAmount,
-      this.paymentForm,
-      this.paymentState,
-      this.offlineStatus,
-      this.amountModification,
-      this.refundSupported});
-
-  PaymentSupport.fromJson(Map<String, dynamic> json)
-      : amount = Amount.fromJson(json['amount'] ?? {}),
-        tipAmount = TipAmount.fromJson(json['tipAmount'] ?? {}),
-        paymentForm = json['paymentForm'],
-        paymentState = json['paymentState'],
-        offlineStatus = OfflineStatus.fromJson(json['offlineStatus'] ?? {}),
-        amountModification = json['amountModification'],
-        refundSupported = json['refundSupported'];
-
-  Map<String, dynamic> toJson() => {
-        'amount': amount?.toJson(),
-        'tipAmount': tipAmount?.toJson(),
-        'paymentForm': paymentForm,
-        'paymentState': paymentState,
-        'offlineStatus': offlineStatus?.toJson(),
-        'amountModification': amountModification,
-        'refundSupported': refundSupported
       };
 }
 
@@ -1087,139 +946,202 @@ class AtriumPaymentAccounts {
 
 /// Json path:
 /// ```
-/// response.closedOrder.receiptData.receiptJson.orderData
+/// request.receiptInfo.orderData
 /// ```
 class OrderData {
-  // response.closedOrder.receiptData.receiptJson.orderData#terminalNumber
-  final String terminalNumber;
-  // response.closedOrder.receiptData.receiptJson.orderData#storeInfo
-  final StoreInfo storeInfo;
-  // response.closedOrder.receiptData.receiptJson.orderData#showAllPrices
-  final bool showAllPrices;
-  // response.closedOrder.receiptData.receiptJson.orderData#lineItems
+  // request.receiptInfo.orderData#orderId
+  final String orderId;
+  // request.receiptInfo.orderData#version
+  final int version;
+  // request.receiptInfo.orderData#tenantId
+  final String tenantId;
+  // request.receiptInfo.orderData#contextId
+  final String contextId;
+  // request.receiptInfo.orderData#created
+  final String created;
+  // request.receiptInfo.orderData#lastUpdated
+  final String lastUpdated;
+  // request.receiptInfo.orderData#orderState
+  final String orderState;
+  // request.receiptInfo.orderData#orderNumber
+  final String orderNumber;
+  // request.receiptInfo.orderData#currencyUnit
+  final String currencyUnit;
+  // request.receiptInfo.orderData#lineItems
   final List<LineItems> lineItems;
-  // response.closedOrder.receiptData.receiptJson.orderData#tip
-  final bool tip;
-  // response.closedOrder.receiptData.receiptJson.orderData#totalAmount
-  final String totalAmount;
-  // response.closedOrder.receiptData.receiptJson.orderData#gratuity
-  final bool gratuity;
-  // response.closedOrder.receiptData.receiptJson.orderData#serviceAmount
-  final bool serviceAmount;
-  // response.closedOrder.receiptData.receiptJson.orderData#discount
-  final bool discount;
-  // response.closedOrder.receiptData.receiptJson.orderData#discountName
-  final dynamic discountName;
-  // response.closedOrder.receiptData.receiptJson.orderData#checkNumber
-  final String checkNumber;
-  // response.closedOrder.receiptData.receiptJson.orderData#receipientName
-  final String receipientName;
-  // response.closedOrder.receiptData.receiptJson.orderData#mobileNumber
-  final String mobileNumber;
-  // response.closedOrder.receiptData.receiptJson.orderData#orderMessage
-  final String orderMessage;
-  // response.closedOrder.receiptData.receiptJson.orderData#paymentInfo
-  final List<PaymentInfo> paymentInfo;
-  // response.closedOrder.receiptData.receiptJson.orderData#currencyInfo
-  final CurrencyInfo currencyInfo;
-  // response.closedOrder.receiptData.receiptJson.orderData#dateTime
-  final String dateTime;
-  // response.closedOrder.receiptData.receiptJson.orderData#timezoneOffsetMinutes
-  final int timezoneOffsetMinutes;
-  // response.closedOrder.receiptData.receiptJson.orderData#printDateTime
-  final String printDateTime;
-  // response.closedOrder.receiptData.receiptJson.orderData#receiptDate
-  final String receiptDate;
-  // response.closedOrder.receiptData.receiptJson.orderData#receiptTime
-  final String receiptTime;
-  // response.closedOrder.receiptData.receiptJson.orderData#deliveryConfirmationText
-  final String deliveryConfirmationText;
-  // response.closedOrder.receiptData.receiptJson.orderData#subtotalAmount
-  final String subtotalAmount;
-  // response.closedOrder.receiptData.receiptJson.orderData#taxAmount
-  final String taxAmount;
+  // request.receiptInfo.orderData#discounts
+  final List<dynamic> discounts;
+  // request.receiptInfo.orderData#gratuityAmount
+  final GratuityAmount gratuityAmount;
+  // request.receiptInfo.orderData#serviceAmount
+  final ServiceAmount serviceAmount;
+  // request.receiptInfo.orderData#taxExcludedTotalAmount
+  final TaxExcludedTotalAmount taxExcludedTotalAmount;
+  // request.receiptInfo.orderData#taxExcludedServiceChargeAndGratuityIncludedTotalAmount
+  final TaxExcludedServiceChargeAndGratuityIncludedTotalAmount
+      taxExcludedServiceChargeAndGratuityIncludedTotalAmount;
+  // request.receiptInfo.orderData#taxTotalAmount
+  final TaxTotalAmount taxTotalAmount;
+  // request.receiptInfo.orderData#taxIncludedTotalAmount
+  final TaxIncludedTotalAmount taxIncludedTotalAmount;
+  // request.receiptInfo.orderData#subTotalAmount
+  final SubTotalAmount subTotalAmount;
+  // request.receiptInfo.orderData#subTotalAmountWithoutDiscount
+  final SubTotalAmountWithoutDiscount subTotalAmountWithoutDiscount;
+  // request.receiptInfo.orderData#subTotalTaxAmount
+  final SubTotalTaxAmount subTotalTaxAmount;
+  // request.receiptInfo.orderData#totalPaymentAmount
+  final TotalPaymentAmount totalPaymentAmount;
+  // request.receiptInfo.orderData#totalTipAmount
+  final TotalTipAmount totalTipAmount;
+  // request.receiptInfo.orderData#totalDueAmount
+  final TotalDueAmount totalDueAmount;
+  // request.receiptInfo.orderData#amountModifications
+  final List<dynamic> amountModifications;
+  // request.receiptInfo.orderData#totalDiscountAmount
+  final TotalDiscountAmount totalDiscountAmount;
+  // request.receiptInfo.orderData#totalRoundAmount
+  final TotalRoundAmount totalRoundAmount;
+  // request.receiptInfo.orderData#taxBreakdown
+  final TaxBreakdown taxBreakdown;
+  // request.receiptInfo.orderData#payments
+  final List<dynamic> payments;
+  // request.receiptInfo.orderData#payments2
+  final List<dynamic> payments2;
+  // request.receiptInfo.orderData#properties
+  final Properties properties;
+  // request.receiptInfo.orderData#internalProperties
+  final InternalProperties internalProperties;
+  // request.receiptInfo.orderData#scheduledOrderCompletionTimeStamp
+  final String scheduledOrderCompletionTimeStamp;
+  // request.receiptInfo.orderData#scheduleEndTimeSlot
+  final String scheduleEndTimeSlot;
+  // request.receiptInfo.orderData#scheduledOrderTime
+  final String scheduledOrderTime;
 
   OrderData(
-      {this.terminalNumber,
-      this.storeInfo,
-      this.showAllPrices,
+      {this.orderId,
+      this.version,
+      this.tenantId,
+      this.contextId,
+      this.created,
+      this.lastUpdated,
+      this.orderState,
+      this.orderNumber,
+      this.currencyUnit,
       this.lineItems,
-      this.tip,
-      this.totalAmount,
-      this.gratuity,
+      this.discounts,
+      this.gratuityAmount,
       this.serviceAmount,
-      this.discount,
-      this.discountName,
-      this.checkNumber,
-      this.receipientName,
-      this.mobileNumber,
-      this.orderMessage,
-      this.paymentInfo,
-      this.currencyInfo,
-      this.dateTime,
-      this.timezoneOffsetMinutes,
-      this.printDateTime,
-      this.receiptDate,
-      this.receiptTime,
-      this.deliveryConfirmationText,
-      this.subtotalAmount,
-      this.taxAmount});
+      this.taxExcludedTotalAmount,
+      this.taxExcludedServiceChargeAndGratuityIncludedTotalAmount,
+      this.taxTotalAmount,
+      this.taxIncludedTotalAmount,
+      this.subTotalAmount,
+      this.subTotalAmountWithoutDiscount,
+      this.subTotalTaxAmount,
+      this.totalPaymentAmount,
+      this.totalTipAmount,
+      this.totalDueAmount,
+      this.amountModifications,
+      this.totalDiscountAmount,
+      this.totalRoundAmount,
+      this.taxBreakdown,
+      this.payments,
+      this.payments2,
+      this.properties,
+      this.internalProperties,
+      this.scheduledOrderCompletionTimeStamp,
+      this.scheduleEndTimeSlot,
+      this.scheduledOrderTime});
 
   OrderData.fromJson(Map<String, dynamic> json)
-      : terminalNumber = json['terminalNumber'],
-        storeInfo = StoreInfo.fromJson(json['storeInfo'] ?? {}),
-        showAllPrices = json['showAllPrices'],
+      : orderId = json['orderId'],
+        version = json['version'],
+        tenantId = json['tenantId'],
+        contextId = json['contextId'],
+        created = json['created'],
+        lastUpdated = json['lastUpdated'],
+        orderState = json['orderState'],
+        orderNumber = json['orderNumber'],
+        currencyUnit = json['currencyUnit'],
         lineItems = (json['lineItems'] as List)
             ?.map((e) => LineItems.fromJson(e ?? {}))
             ?.toList(),
-        tip = json['tip'],
-        totalAmount = json['totalAmount'],
-        gratuity = json['gratuity'],
-        serviceAmount = json['serviceAmount'],
-        discount = json['discount'],
-        discountName = json['discountName'],
-        checkNumber = json['checkNumber'],
-        receipientName = json['receipientName'],
-        mobileNumber = json['mobileNumber'],
-        orderMessage = json['orderMessage'],
-        paymentInfo = (json['paymentInfo'] as List)
-            ?.map((e) => PaymentInfo.fromJson(e ?? {}))
-            ?.toList(),
-        currencyInfo = CurrencyInfo.fromJson(json['currencyInfo'] ?? {}),
-        dateTime = json['dateTime'],
-        timezoneOffsetMinutes = json['timezoneOffsetMinutes'],
-        printDateTime = json['printDateTime'],
-        receiptDate = json['receiptDate'],
-        receiptTime = json['receiptTime'],
-        deliveryConfirmationText = json['deliveryConfirmationText'],
-        subtotalAmount = json['subtotalAmount'],
-        taxAmount = json['taxAmount'];
+        discounts = json['discounts'],
+        gratuityAmount = GratuityAmount.fromJson(json['gratuityAmount'] ?? {}),
+        serviceAmount = ServiceAmount.fromJson(json['serviceAmount'] ?? {}),
+        taxExcludedTotalAmount = TaxExcludedTotalAmount.fromJson(
+            json['taxExcludedTotalAmount'] ?? {}),
+        taxExcludedServiceChargeAndGratuityIncludedTotalAmount =
+            TaxExcludedServiceChargeAndGratuityIncludedTotalAmount.fromJson(
+                json['taxExcludedServiceChargeAndGratuityIncludedTotalAmount'] ??
+                    {}),
+        taxTotalAmount = TaxTotalAmount.fromJson(json['taxTotalAmount'] ?? {}),
+        taxIncludedTotalAmount = TaxIncludedTotalAmount.fromJson(
+            json['taxIncludedTotalAmount'] ?? {}),
+        subTotalAmount = SubTotalAmount.fromJson(json['subTotalAmount'] ?? {}),
+        subTotalAmountWithoutDiscount = SubTotalAmountWithoutDiscount.fromJson(
+            json['subTotalAmountWithoutDiscount'] ?? {}),
+        subTotalTaxAmount =
+            SubTotalTaxAmount.fromJson(json['subTotalTaxAmount'] ?? {}),
+        totalPaymentAmount =
+            TotalPaymentAmount.fromJson(json['totalPaymentAmount'] ?? {}),
+        totalTipAmount = TotalTipAmount.fromJson(json['totalTipAmount'] ?? {}),
+        totalDueAmount = TotalDueAmount.fromJson(json['totalDueAmount'] ?? {}),
+        amountModifications = json['amountModifications'],
+        totalDiscountAmount =
+            TotalDiscountAmount.fromJson(json['totalDiscountAmount'] ?? {}),
+        totalRoundAmount =
+            TotalRoundAmount.fromJson(json['totalRoundAmount'] ?? {}),
+        taxBreakdown = TaxBreakdown.fromJson(json['taxBreakdown'] ?? {}),
+        payments = json['payments'],
+        payments2 = json['payments2'],
+        properties = Properties.fromJson(json['properties'] ?? {}),
+        internalProperties =
+            InternalProperties.fromJson(json['internalProperties'] ?? {}),
+        scheduledOrderCompletionTimeStamp =
+            json['scheduledOrderCompletionTimeStamp'],
+        scheduleEndTimeSlot = json['scheduleEndTimeSlot'],
+        scheduledOrderTime = json['scheduledOrderTime'];
 
   Map<String, dynamic> toJson() => {
-        'terminalNumber': terminalNumber,
-        'storeInfo': storeInfo?.toJson(),
-        'showAllPrices': showAllPrices,
+        'orderId': orderId,
+        'version': version,
+        'tenantId': tenantId,
+        'contextId': contextId,
+        'created': created,
+        'lastUpdated': lastUpdated,
+        'orderState': orderState,
+        'orderNumber': orderNumber,
+        'currencyUnit': currencyUnit,
         'lineItems': lineItems?.map((e) => e?.toJson())?.toList(),
-        'tip': tip,
-        'totalAmount': totalAmount,
-        'gratuity': gratuity,
-        'serviceAmount': serviceAmount,
-        'discount': discount,
-        'discountName': discountName,
-        'checkNumber': checkNumber,
-        'receipientName': receipientName,
-        'mobileNumber': mobileNumber,
-        'orderMessage': orderMessage,
-        'paymentInfo': paymentInfo?.map((e) => e?.toJson())?.toList(),
-        'currencyInfo': currencyInfo?.toJson(),
-        'dateTime': dateTime,
-        'timezoneOffsetMinutes': timezoneOffsetMinutes,
-        'printDateTime': printDateTime,
-        'receiptDate': receiptDate,
-        'receiptTime': receiptTime,
-        'deliveryConfirmationText': deliveryConfirmationText,
-        'subtotalAmount': subtotalAmount,
-        'taxAmount': taxAmount
+        'discounts': discounts,
+        'gratuityAmount': gratuityAmount?.toJson(),
+        'serviceAmount': serviceAmount?.toJson(),
+        'taxExcludedTotalAmount': taxExcludedTotalAmount?.toJson(),
+        'taxExcludedServiceChargeAndGratuityIncludedTotalAmount':
+            taxExcludedServiceChargeAndGratuityIncludedTotalAmount?.toJson(),
+        'taxTotalAmount': taxTotalAmount?.toJson(),
+        'taxIncludedTotalAmount': taxIncludedTotalAmount?.toJson(),
+        'subTotalAmount': subTotalAmount?.toJson(),
+        'subTotalAmountWithoutDiscount':
+            subTotalAmountWithoutDiscount?.toJson(),
+        'subTotalTaxAmount': subTotalTaxAmount?.toJson(),
+        'totalPaymentAmount': totalPaymentAmount?.toJson(),
+        'totalTipAmount': totalTipAmount?.toJson(),
+        'totalDueAmount': totalDueAmount?.toJson(),
+        'amountModifications': amountModifications,
+        'totalDiscountAmount': totalDiscountAmount?.toJson(),
+        'totalRoundAmount': totalRoundAmount?.toJson(),
+        'taxBreakdown': taxBreakdown?.toJson(),
+        'payments': payments,
+        'payments2': payments2,
+        'properties': properties?.toJson(),
+        'internalProperties': internalProperties?.toJson(),
+        'scheduledOrderCompletionTimeStamp': scheduledOrderCompletionTimeStamp,
+        'scheduleEndTimeSlot': scheduleEndTimeSlot,
+        'scheduledOrderTime': scheduledOrderTime
       };
 }
 
@@ -1935,22 +1857,6 @@ class PreparationWindow {
         end = json['end'];
 
   Map<String, dynamic> toJson() => {'beginning': beginning, 'end': end};
-}
-
-/// Json path:
-/// ```
-/// response.closedOrder.receiptData.receiptJson.orderData.storeInfo
-/// ```
-class StoreInfo {
-  // response.closedOrder.receiptData.receiptJson.orderData.storeInfo#businessContextId
-  final String businessContextId;
-
-  StoreInfo({this.businessContextId});
-
-  StoreInfo.fromJson(Map<String, dynamic> json)
-      : businessContextId = json['businessContextId'];
-
-  Map<String, dynamic> toJson() => {'businessContextId': businessContextId};
 }
 
 /// Json path:

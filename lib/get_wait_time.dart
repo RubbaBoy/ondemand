@@ -401,10 +401,10 @@ class Request extends BaseRequest {
 
 /// Json path:
 /// ```
-/// response.maxTime.periodType
+/// response.minTime.periodType
 /// ```
 class PeriodType {
-  // response.maxTime.periodType#name
+  // response.minTime.periodType#name
   final String name;
 
   PeriodType({this.name});
@@ -416,10 +416,10 @@ class PeriodType {
 
 /// Json path:
 /// ```
-/// response.maxTime.fieldType
+/// response.minTime.fieldType
 /// ```
 class FieldType {
-  // response.maxTime.fieldType#name
+  // response.minTime.fieldType#name
   final String name;
 
   FieldType({this.name});
